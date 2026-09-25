@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dtoo.pe/eventos/PedidoCreado.v1.json",
+  "title": "PedidoCreado v1",
+  "type": "object",
+  "required": ["event_id", "nombre", "version", "ocurrido_en", "agregado_uid", "payload"],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$" },
+    "nombre": { "const": "PedidoCreado" },
+    "version": { "const": 1 },
+    "ocurrido_en": { "type": "string", "format": "date-time" },
+    "agregado_uid": { "type": "string" },
+    "payload": {
+      "type": "object",
+      "required": ["pedido_uid", "numero", "cliente_uid", "cliente_telefono", "segmento", "total", "fecha_entrega", "franja_uid", "metodo_pago", "lineas", "ubicacion"],
+      "properties": {
+        "pedido_uid": { "type": "string" },
+        "numero": { "type": "string" },
+        "cliente_uid": { "type": "string" },
+        "cliente_telefono": { "type": "string" },
+        "cliente_correo": { "type": ["string", "null"] },
+        "segmento": { "enum": ["hogar", "negocio"] },
+        "total": { "type": "string", "pattern": "^\\d+\\.\\d{2}$" },
+        "fecha_entrega": { "type": "string", "format": "date" },
+        "franja_uid": { "type": "string" },
+        "metodo_pago": { "enum": ["efectivo", "yape", "plin", "tarjeta"] },
+        "paga_con": { "type": ["string", "null"] },
+        "ubicacion": { "type": "object", "required": ["lat", "lng"], "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "lineas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sku", "cantidad", "precio_unitario"],
+            "properties": { "sku": { "type": "string" }, "cantidad": { "type": "integer" }, "precio_unitario": { "type": "string" } }
+          }
+        }
+      }
+    }
+  }
+}

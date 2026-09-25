@@ -1,0 +1,21 @@
+/* Tokens de marca (05 §7). Único lugar donde se definen colores y medidas. */
+:root {
+  --color-primario: #1E5EFF;
+  --color-primario-oscuro: #0F2D6B;
+  --color-acento: #FFC53D;
+  --color-fondo: #FFF9EE;
+  --color-superficie: #FFFFFF;
+  --color-arena: #F4EBDD;
+  --color-texto: #2B2A28;
+  --color-texto-secundario: #6B665E;
+  --color-exito: #1B8A4C;
+  --color-alerta: #C77700;
+  --color-error: #C0392B;
+  --espacio-1: 4px; --espacio-2: 8px; --espacio-3: 12px; --espacio-4: 16px; --espacio-6: 24px; --espacio-8: 32px;
+  --radio: 8px;
+  --tam-toque: 44px;
+  --tam-toque-calle: 56px;
+  --fuente: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+[data-app="motorizado"] { --color-fondo: #FFFFFF; font-size: 18px; }
+[data-app="panel"] { --color-fondo: #FAFAF7; }

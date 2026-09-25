@@ -1,0 +1,48 @@
+# Verifica las fronteras del ADR-005. `vendor/bin/deptrac analyse` falla el CI si se violan.
+deptrac:
+  paths: [./app]
+  layers:
+    - { name: Shared,            collectors: [{ type: directory, value: 'app/Shared/.*' }] }
+    - { name: Catalogo,          collectors: [{ type: directory, value: 'app/Modules/Catalogo/(?!Contracts|Events).*' }] }
+    - { name: CatalogoPub,       collectors: [{ type: directory, value: 'app/Modules/Catalogo/(Contracts|Events)/.*' }] }
+    - { name: Inventario,        collectors: [{ type: directory, value: 'app/Modules/Inventario/(?!Contracts|Events).*' }] }
+    - { name: InventarioPub,     collectors: [{ type: directory, value: 'app/Modules/Inventario/(Contracts|Events)/.*' }] }
+    - { name: Zonas,             collectors: [{ type: directory, value: 'app/Modules/Zonas/(?!Contracts|Events).*' }] }
+    - { name: ZonasPub,          collectors: [{ type: directory, value: 'app/Modules/Zonas/(Contracts|Events)/.*' }] }
+    - { name: Clientes,          collectors: [{ type: directory, value: 'app/Modules/Clientes/(?!Contracts|Events).*' }] }
+    - { name: ClientesPub,       collectors: [{ type: directory, value: 'app/Modules/Clientes/(Contracts|Events)/.*' }] }
+    - { name: Pedidos,           collectors: [{ type: directory, value: 'app/Modules/Pedidos/(?!Contracts|Events).*' }] }
+    - { name: PedidosPub,        collectors: [{ type: directory, value: 'app/Modules/Pedidos/(Contracts|Events)/.*' }] }
+    - { name: Riesgo,            collectors: [{ type: directory, value: 'app/Modules/Riesgo/(?!Contracts|Events).*' }] }
+    - { name: RiesgoPub,         collectors: [{ type: directory, value: 'app/Modules/Riesgo/(Contracts|Events)/.*' }] }
+    - { name: Fulfillment,       collectors: [{ type: directory, value: 'app/Modules/Fulfillment/(?!Contracts|Events).*' }] }
+    - { name: FulfillmentPub,    collectors: [{ type: directory, value: 'app/Modules/Fulfillment/(Contracts|Events)/.*' }] }
+    - { name: Cobranza,          collectors: [{ type: directory, value: 'app/Modules/Cobranza/(?!Contracts|Events).*' }] }
+    - { name: CobranzaPub,       collectors: [{ type: directory, value: 'app/Modules/Cobranza/(Contracts|Events)/.*' }] }
+    - { name: Identidad,         collectors: [{ type: directory, value: 'app/Modules/Identidad/(?!Contracts|Events).*' }] }
+    - { name: IdentidadPub,      collectors: [{ type: directory, value: 'app/Modules/Identidad/(Contracts|Events)/.*' }] }
+    - { name: Notificaciones,    collectors: [{ type: directory, value: 'app/Modules/Notificaciones/(?!Contracts|Events).*' }] }
+    - { name: NotificacionesPub, collectors: [{ type: directory, value: 'app/Modules/Notificaciones/(Contracts|Events)/.*' }] }
+  ruleset:
+    Shared: []
+    # Cada módulo usa Shared, su propia parte pública y SOLO la parte pública de los demás (según 02 §3.2).
+    Catalogo:       [Shared, CatalogoPub, InventarioPub]
+    Inventario:     [Shared, InventarioPub, CatalogoPub, PedidosPub, FulfillmentPub]
+    Zonas:          [Shared, ZonasPub, PedidosPub]
+    Clientes:       [Shared, ClientesPub, ZonasPub, PedidosPub]
+    Pedidos:        [Shared, PedidosPub, CatalogoPub, InventarioPub, ZonasPub, ClientesPub, RiesgoPub, FulfillmentPub, CobranzaPub]
+    Riesgo:         [Shared, RiesgoPub, PedidosPub, ClientesPub, FulfillmentPub]
+    Fulfillment:    [Shared, FulfillmentPub, PedidosPub, IdentidadPub]
+    Cobranza:       [Shared, CobranzaPub, FulfillmentPub, PedidosPub, IdentidadPub]
+    Identidad:      [Shared, IdentidadPub]
+    Notificaciones: [Shared, NotificacionesPub, PedidosPub, FulfillmentPub, CobranzaPub, InventarioPub, ZonasPub, RiesgoPub, ClientesPub]
+    CatalogoPub: [Shared]
+    InventarioPub: [Shared]
+    ZonasPub: [Shared]
+    ClientesPub: [Shared]
+    PedidosPub: [Shared]
+    RiesgoPub: [Shared]
+    FulfillmentPub: [Shared]
+    CobranzaPub: [Shared]
+    IdentidadPub: [Shared]
+    NotificacionesPub: [Shared]

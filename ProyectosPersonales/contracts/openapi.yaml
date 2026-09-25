@@ -1,0 +1,304 @@
+openapi: 3.1.0
+info:
+  title: D'Too Limpieza API
+  version: 0.2.0
+  description: |
+    Fuente de verdad del contrato entre backend Laravel y frontends Angular (ADR-006).
+    Convenciones: JSON, identificadores públicos ULID, errores RFC 9457, paginación por cursor,
+    cabecera `Idempotency-Key` obligatoria en toda operación de escritura.
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local
+tags:
+  - name: salud
+  - name: auth
+  - name: catalogo
+  - name: pedidos
+security: []
+paths:
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Inicio de sesión del personal (usuario + contraseña; código TOTP si aplica)
+      operationId: iniciarSesion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [usuario, password]
+              properties:
+                usuario: { type: string, maxLength: 40 }
+                password: { type: string, maxLength: 200 }
+                codigo_mfa: { type: string, pattern: '^\\d{6}$' }
+                dispositivo: { type: string, maxLength: 60, example: 'moto-android' }
+      responses:
+        '200':
+          description: Sesión iniciada
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Sesion' }
+        '401':
+          description: Credenciales inválidas o MFA requerido (ver `codigo`; si `debe_configurar_mfa` es true llega `token_configuracion`)
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+  /auth/yo:
+    get:
+      tags: [auth]
+      summary: Usuario autenticado
+      operationId: obtenerUsuarioActual
+      security: [{ bearer: [] }]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UsuarioActual' }
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: Revoca el token actual
+      operationId: cerrarSesion
+      security: [{ bearer: [] }]
+      responses:
+        '204': { description: Sesión cerrada }
+  /auth/mfa/generar:
+    post:
+      tags: [auth]
+      summary: Genera secreto TOTP y URL para el QR (válido 10 min)
+      operationId: generarMfa
+      security: [{ bearer: [] }]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [secreto, otpauth_url]
+                properties:
+                  secreto: { type: string }
+                  otpauth_url: { type: string, format: uri }
+  /auth/mfa/confirmar:
+    post:
+      tags: [auth]
+      summary: Confirma el MFA con un código válido
+      operationId: confirmarMfa
+      security: [{ bearer: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [codigo]
+              properties:
+                codigo: { type: string, pattern: '^\\d{6}$' }
+      responses:
+        '200':
+          description: MFA activo
+          content:
+            application/json:
+              schema: { type: object, properties: { mfa_activo: { type: boolean } } }
+        '422':
+          description: Código inválido
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+  /salud:
+    get:
+      tags: [salud]
+      summary: Estado del servicio
+      operationId: obtenerSalud
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [estado, version]
+                properties:
+                  estado: { type: string, enum: [ok] }
+                  version: { type: string }
+  /catalogo/categorias:
+    get:
+      tags: [catalogo]
+      summary: Árbol de categorías publicadas
+      operationId: listarCategorias
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Categoria' }
+  /pedidos:
+    post:
+      tags: [pedidos]
+      summary: Crear un pedido (reserva stock y cupo, todo-o-nada)
+      operationId: crearPedido
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CrearPedidoRequest' }
+      responses:
+        '201':
+          description: Pedido creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Pedido' }
+        '409':
+          description: Stock insuficiente o cupo agotado (ver `codigo`)
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+        '422':
+          description: Datos inválidos
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      description: Token Sanctum del personal (guard `personal`)
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: ULID generado por el cliente. Reintentar con la misma clave devuelve la misma respuesta.
+      schema: { type: string, minLength: 26, maxLength: 80 }
+  schemas:
+    Ulid:
+      type: string
+      pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+      example: 01J7Q4X8Z1Y2W3V4U5T6S7R8Q9
+    Dinero:
+      type: string
+      description: Decimal con dos cifras, como texto para no perder precisión.
+      pattern: '^\d+\.\d{2}$'
+      example: '86.00'
+    Problem:
+      type: object
+      description: RFC 9457
+      required: [type, title, status]
+      properties:
+        type: { type: string, format: uri, example: 'https://dtoo.pe/errores/stock-insuficiente' }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        codigo:
+          type: string
+          description: Código estable que el frontend traduce a un mensaje.
+          enum: [stock_insuficiente, cupo_agotado, fuera_de_zona, transicion_invalida, datos_invalidos, credenciales_invalidas, mfa_requerido, mfa_codigo_invalido, no_autenticado, no_autorizado, no_encontrado, demasiadas_solicitudes, error_interno]
+        debe_configurar_mfa: { type: boolean, description: Solo en mfa_requerido }
+        token_configuracion: { type: string, description: Token temporal (15 min) con habilidad mfa:configurar }
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              campo: { type: string }
+              mensaje: { type: string }
+        trace_id: { type: string }
+    Sesion:
+      type: object
+      required: [token, usuario]
+      properties:
+        token: { type: string }
+        usuario: { $ref: '#/components/schemas/UsuarioActual' }
+    UsuarioActual:
+      type: object
+      required: [uid, nombre, rol, mfa_activo]
+      properties:
+        uid: { $ref: '#/components/schemas/Ulid' }
+        nombre: { type: string }
+        usuario: { type: string }
+        rol: { type: string, enum: [administrador, almacen, motorizado] }
+        mfa_activo: { type: boolean }
+    Categoria:
+      type: object
+      required: [uid, nombre, slug]
+      properties:
+        uid: { $ref: '#/components/schemas/Ulid' }
+        nombre: { type: string }
+        slug: { type: string }
+        hijas:
+          type: array
+          items: { $ref: '#/components/schemas/Categoria' }
+    CrearPedidoRequest:
+      type: object
+      required: [cliente, direccion, entrega, pago, lineas]
+      properties:
+        cliente:
+          type: object
+          required: [telefono, nombre, segmento]
+          properties:
+            telefono: { type: string, description: E.164, example: '+51987654321' }
+            nombre: { type: string, maxLength: 150 }
+            correo: { type: [string, 'null'], format: email }
+            segmento: { type: string, enum: [hogar, negocio] }
+            razon_social: { type: [string, 'null'], maxLength: 150 }
+        direccion:
+          type: object
+          required: [texto, referencia, lat, lng]
+          properties:
+            texto: { type: string, maxLength: 255 }
+            referencia: { type: string, maxLength: 255 }
+            lat: { type: number }
+            lng: { type: number }
+        entrega:
+          type: object
+          required: [fecha, franja_uid]
+          properties:
+            fecha: { type: string, format: date }
+            franja_uid: { $ref: '#/components/schemas/Ulid' }
+        pago:
+          type: object
+          required: [metodo]
+          description: Si metodo = efectivo, paga_con es obligatorio y >= total.
+          properties:
+            metodo: { type: string, enum: [efectivo, yape, plin, tarjeta] }
+            paga_con: { $ref: '#/components/schemas/Dinero' }
+        lineas:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [sku, cantidad]
+            properties:
+              sku: { type: string }
+              cantidad: { type: integer, minimum: 1 }
+        nota: { type: [string, 'null'], maxLength: 500 }
+        consentimiento_marketing: { type: boolean, default: false }
+    Pedido:
+      type: object
+      required: [uid, numero, estado, total, moneda]
+      properties:
+        uid: { $ref: '#/components/schemas/Ulid' }
+        numero: { type: string, example: DT-000123 }
+        estado:
+          type: string
+          enum: [Creado, PendienteDeRevision, Confirmado, EnPreparacion, ListoParaDespacho, EnRuta, Entregado, Cobrado, EntregaFallida, Devuelto, Cancelado]
+        estado_cliente: { type: string, description: Texto amigable (05 §3.8) }
+        total: { $ref: '#/components/schemas/Dinero' }
+        vuelto: { $ref: '#/components/schemas/Dinero' }
+        moneda: { type: string, enum: [PEN] }
+        entrega:
+          type: object
+          properties:
+            fecha: { type: string, format: date }
+            franja_texto: { type: string, example: '15:00–18:00' }
