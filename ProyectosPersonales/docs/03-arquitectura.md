@@ -24,11 +24,11 @@
 | 2 | **Continuidad de la operación** | La web pública cae 30 min: almacén y motorizados siguen trabajando; el motorizado sin señal registra 10 entregas y todas llegan al servidor al reconectar. |
 | 3 | **Evolución sin reescritura** | Abrir un segundo distrito o cambiar la herramienta de tiempo real no toca los módulos de negocio. |
 
-**Stakeholders:** dueño/administrador (Cristhian Rodriguez Ruiz), 2 personas de almacén, 3 motorizados, clientes hogar y negocio, 2 desarrolladores.
+**Stakeholders:** dueño/administrador y único desarrollador (Cristhian Rodriguez Ruiz), 2 personas de almacén, 3 motorizados, clientes hogar y negocio. Actualización del 26/09/2026: Cristhian también realiza las pruebas y dispone de 20 h/semana; no cambia el personal operativo.
 
 ## 2. Restricciones
 
-Ver documento 01 §7 y ADRs 001–004: Angular, Laravel API, MySQL 8, GitHub monorepo, sin servicios de mensajería de pago, sin pagos en línea, equipo de dos.
+Ver documento 01 §7 y ADRs 001–004: Angular, Laravel API, MySQL 8, GitHub monorepo, sin servicios de mensajería de pago, sin pagos en línea. El equipo actual es unipersonal; las menciones posteriores a un equipo de dos describen el contexto original del diseño. El 08 actualiza capacidad/plazo; el 10 registra contradicciones por resolver sin dar la arquitectura por implementada.
 
 ## 3. Contexto y alcance (C4 nivel 1)
 

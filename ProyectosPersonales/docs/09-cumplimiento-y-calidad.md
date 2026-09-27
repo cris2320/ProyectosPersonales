@@ -8,6 +8,8 @@
 | Depende de | 01, 03 §8, 04, 05 §7, 08 |
 | Modifica | `backlog.csv` (historias nuevas E7-xx), 04 (adenda 16c), 08 (§3 capacidad) |
 
+> Revisión 26/09/2026: sigue pendiente de aprobación. El [10 A11/A12](10-auditoria-del-repositorio.md) detecta ratios de contraste incorrectos y un recordatorio de reclamaciones que debe vincularse al vencimiento en días hábiles. Las reglas de reembolso, privacidad y terceros requieren validación antes de implementarse. El plan actual es unipersonal a 20 h/semana; ver [08](08-roadmap-y-plan-scrum.md) y [11](11-decisiones-pendientes.md).
+
 > Este documento responde a la lista de requisitos de cumplimiento y calidad del dueño del 2026-09-25. Para cada ítem: **dónde ya estaba cubierto** en la documentación aprobada, **qué se añade** ahora y **qué historia del backlog lo implementa**. Nada aquí es una intención: todo termina en una historia con criterios de aceptación o en una regla de la Definition of Done.
 >
 > Aviso: describo obligaciones legales peruanas según su conocimiento público; no sustituye la revisión de un abogado, que el 08 §2.3 ya recomienda antes del lanzamiento.
@@ -81,7 +83,7 @@
 
 ## 8. Impacto en el plan (08)
 
-Historias nuevas E7-01 a E7-17: **+46 puntos en fase 1** (+8 de E7-07 en fase 1.1; detalle en `backlog.csv`). La mayoría son de Sprint 5 y la semana de lanzamiento; tres se adelantan a S0–S2 porque condicionan el diseño (inventario de datos, rate limits, Sentry). Con la Opción A el plan pasa a **432 puntos en fase 1 (415 Must) frente a ~270 de capacidad en 12 semanas**; el margen desaparece y hay que **decidir en la planning del S0** cuáles de las siguientes van a la fase 1.1 sin comprometer el lanzamiento legal: E7-07 (reseñas, ya en 1.1), E5-09 (cuenta de cliente), E5-04 (avísame), E2-11 (ficha cliente). Lo legal (E7-01 a E7-05, E7-08, E7-09) **no se mueve**: sin eso no se puede lanzar.
+Historias E7-01 a E7-17: **46 puntos de fase 1 + 8 de fase 1.1**. Se conservan en el backlog; sus sprints originales son históricos. El equipo confirmado el 26/09 es Cristhian a 20 h/semana, y el 08 propone fundaciones como primer trimestre, sin lanzamiento comercial. Los requisitos de cumplimiento aplican antes de cada funcionalidad afectada y de operar con clientes reales, aunque no tengan una fecha comercial comprometida. La aprobación del 09 y de los textos finales permanece pendiente; no se ha suprimido ninguna obligación para encajar el calendario.
 
 ## 9. Pendientes del dueño
 

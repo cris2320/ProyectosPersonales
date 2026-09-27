@@ -10,6 +10,8 @@
 
 ---
 
+> Auditoría 26/09/2026: este bloque sigue **sin aceptación verificada**. Se detectaron problemas en idempotencia, outbox, pruebas, autorización y la configuración Sanctum indicada en §2. Ver A03–A10 del [10](10-auditoria-del-repositorio.md); integrar y corregir antes de cerrar este documento. Responsable actual: Cristhian, 20 h/semana; fechas en el [08](08-roadmap-y-plan-scrum.md).
+
 ## 1. Qué contiene este bloque
 
 ### Shared (`backend/app/Shared/`) — infraestructura común

@@ -167,7 +167,7 @@ Escenarios medibles. Gobiernan las decisiones de arquitectura y se verifican con
 | Operativa | Un almacén, motorizados propios, un distrito | Capacidad inicial |
 | Legal | Ley 29733 y Reglamento | Marco peruano |
 | Equipo de operación | 2 personas de almacén (preparan y despachan), 3 motorizados (entregan y cobran), 1 administrador: Cristhian Rodriguez Ruiz (catálogo, pedidos de riesgo, cierre de caja) | Confirmado |
-| Equipo de desarrollo | 2 personas: 1 frontend (Angular), 1 backend (Laravel) | Confirmado. Implica: contratos de API definidos antes de codificar, revisión cruzada de PRs, y automatización fuerte para compensar el tamaño del equipo |
+| Equipo de desarrollo | **Una persona: Cristhian Rodriguez Ruiz; 20 h/semana** | Actualización confirmada por el dueño el 26/09/2026: desarrolla frontend/backend, realiza pruebas y toma decisiones finales. Contratos y automatización se mantienen; adaptación del flujo de revisión pendiente, ver 08 §5 y 11 |
 
 ## 8. Riesgos principales
 
@@ -221,3 +221,4 @@ Escenarios medibles. Gobiernan las decisiones de arquitectura y se verifican con
 | 0.4 | 2026-09-11 | Parámetros operativos confirmados |
 | 1.0 | 2026-09-11 | Equipo confirmado; documento aprobado |
 | 1.1 | 2026-09-14 | Confirmación manual por botón, correo opcional, hoja impresa, PWA para motorizado y panel, stock en tiempo real |
+| Adenda de equipo | 2026-09-26 | Equipo unipersonal y 20 h/semana confirmados; no se modifica ni aprueba un recorte del alcance funcional |

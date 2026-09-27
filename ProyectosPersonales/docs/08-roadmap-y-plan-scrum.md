@@ -1,209 +1,157 @@
-# 08 · Roadmap, prerrequisitos y plan Scrum
+# 08 · Roadmap de tres meses y plan de trabajo individual
 
 | Campo | Valor |
 |---|---|
 | Proyecto | D'Too Limpieza |
-| Estado | Borrador v0.2 — pendiente: fecha de inicio y decisión de equipo (§3). Actualizado el 2026-09-25 con la épica E7 del documento 09 |
-| Fecha | 2026-09-14 |
-| Duración objetivo | 12 semanas (3 meses) desde la fecha de inicio |
-| Depende de | Documentos 01–07 y ADRs (todos aprobados) |
-| Anexo | `backlog.csv` — 71 historias con criterios de aceptación, puntos, sprint, prioridad y dependencias (importable a GitHub Projects, Jira o Trello) |
+| Versión | Borrador v0.3 · actualizado el 26/09/2026 |
+| Inicio confirmado | **26/09/2026** |
+| Horizonte de tres meses | **26/09/2026–26/12/2026** |
+| Desarrollo, pruebas y decisiones | **Cristhian Rodriguez Ruiz, una persona** |
+| Dedicación confirmada | **20 horas semanales, incluyendo desarrollo, pruebas y documentación** |
+| Estado del alcance | Propuesta de primer incremento; pendiente de decisión final de Cristhian |
+| Evidencia de partida | [10 · Auditoría](10-auditoria-del-repositorio.md) |
+| Decisiones abiertas | [11 · Registro de decisiones](11-decisiones-pendientes.md) |
+| Tareas con fechas y horas | [cronograma-3-meses.csv](cronograma-3-meses.csv) |
+| Alcance completo replanificado | [backlog-replanificado.csv](backlog-replanificado.csv) |
+| Línea base anterior | [backlog.csv](backlog.csv) y [roadmap v0.2 histórico](historico/08-roadmap-v0.2.md) |
 
----
+**Inicio autorizado:** Cristhian solicita comenzar por los prerrequisitos de instalación. Ver [12](12-prerrequisitos-windows.md). Su aprobación global está condicionada a que no falte nada; como persisten decisiones y evidencias pendientes, el [11](11-decisiones-pendientes.md) mantiene el alcance concreto de esa autorización y los cierres por verificar.
 
-## 1. Inventario de documentación
+## 1. Resultado que se propone para el trimestre
 
-### 1.1 Completa y aprobada
+**Entregar una base ejecutable, probada y preparada para desarrollar el negocio por módulos:** entorno local reproducible, CI, Laravel modular, workspace Angular de tres apps, contrato/cliente, Shared corregido, Identidad con MFA, componentes visuales base y login funcional del panel y motorizado.
 
-| Doc | Contenido | Estado |
+El alcance corresponde a **E0-01–E0-10: 35 puntos históricos**, más trabajo de corrección detectado en la auditoría. No se consideran completados esos puntos por el código inicial existente: primero deben pasar las pruebas y los criterios de aceptación.
+
+Este resultado **no habilita todavía ventas reales**. Catálogo, Inventario transaccional, checkout, rutas, entregas offline y caja siguen en el backlog. Si el resultado obligatorio de diciembre es vender, se debe aprobar y volver a estimar un MVP que complete un recorrido de negocio coherente. No basta trasladar etiquetas Must a otro sprint ni eliminar pruebas para forzar una fecha.
+
+No se ha aprobado ningún recorte definitivo del producto. Se conserva todo el alcance original y se propone qué financiar con las horas disponibles de este trimestre.
+
+## 2. Capacidad: cálculo y límites
+
+El backlog contiene **88 historias y 440 puntos**: 87 historias/432 puntos en fase 1, de los cuales 415 Must y 17 Should; ocho puntos adicionales de reseñas en fase 1.1. La conversión anterior era `1 punto ≈ medio día enfocado`. Para poder contrastar números se interpreta ese medio día como cuatro horas; **es una hipótesis heredada que debe calibrarse**, no velocidad observada ni una equivalencia universal de Scrum.
+
+| Concepto | Cálculo | Horas |
+|---|---|---:|
+| Referencia de 12 semanas | 12 × 20 h | 240 brutas |
+| Calendario real propuesto del 28/09 al 24/12 | 61 días disponibles × 4 h | 244 brutas |
+| Trabajo enfocado, incluidas pruebas de cada tarea | 61 × 3 h | 183 |
+| Revisión de avances, documentación transversal, decisiones e imprevistos | 61 × 1 h | 61 |
+| E0: diez historias originales | 35 puntos × 4 h | 140 |
+| Revisión/correcciones de auditoría adicionales | T01 + T09 + T10 + T11 + T13 | 32 |
+| Validación final y regresiones | T16 | 8 |
+| **Total de tareas calendarizadas** | **140 + 32 + 8** | **180** |
+| Reserva enfocada sin asignar | 183 − 180 | 3 |
+
+Se supone distribución de **4 h de lunes a viernes**, sin fines de semana, y se excluyen 08/10, 08/12, 09/12 y 25/12. El 01/11 cae domingo y no reduce los días previstos. [Calendario oficial de feriados del Perú](https://www.gob.pe/feriados). Si prefieres trabajar otros días, se redistribuyen las mismas 20 h, sin sumarlas como capacidad adicional.
+
+**Doce semanas no equivalen a tres meses calendario:** desde el 26/09, las primeras doce semanas terminan el 18/12 inclusive; el horizonte solicitado termina el 26/12. La última semana se usa para terminar login, aceptar el incremento y absorber ajustes. No es una semana de lanzamiento comercial. El sábado 26/09 queda como inicio y decisiones iniciales; el primer bloque de trabajo calendarizado comienza el lunes 28/09.
+
+A la hipótesis de cuatro horas por punto, los **415 Must equivalen a 1 660 horas enfocadas**. A 15 h enfocadas por semana serían unas **111 semanas**, antes de feriados, aprendizaje y nuevo trabajo. Es una extrapolación de estimaciones sin calibrar, **no una fecha de entrega del producto**. Sí demuestra que el compromiso anterior de todo el producto en tres meses no tiene sustento para una persona a 20 h.
+
+El margen es reducido. Si las correcciones exceden sus 32 h o la instalación requiere aprendizaje adicional, se reduce el alcance del trimestre o se cambia la fecha; no se consumen silenciosamente horas personales extra ni se rebajan garantías.
+
+## 3. Plan por partes y meses
+
+| Parte | Periodo | Trabajo | Entregable y puerta de salida |
+|---|---|---|---|
+| **1 · Decisiones y entorno** | 26/09–28/10 | T01–T06: alcance, flujo individual, ADRs de servicios, herramientas, Laravel, Angular, Docker y CI | Clon limpio reproducible; apps compilan; API de salud; primer PR con checks verdes. El 06 sigue abierto si falta alguna evidencia |
+| **2 · Contrato y backend base** | 29/10–27/11 | T07–T13: contrato/cliente, Shared, concurrencia de idempotencia, outbox, auditoría, errores, Identidad/MFA | Pruebas de integración MySQL y regresiones de seguridad; backend base validado; no declarar el 07 cerrado con pruebas solo secuenciales |
+| **3 · Interfaces de acceso y aceptación** | 30/11–26/12 | T14–T16: design system, login panel/motorizado, aceptación y siguiente etapa | Login real con MFA, componentes probados, clon limpio/CI y evidencias; decisión del alcance siguiente |
+
+Las tres apps de T04 son esqueletos: SSR/PWA configurados no equivalen a tienda implementada ni sincronización offline operativa. Las pantallas comerciales se desarrollarán en incrementos posteriores.
+
+## 4. Tareas y tiempos
+
+Las fechas son una propuesta calculada secuencialmente a **máximo tres horas enfocadas por día disponible**. Dos tareas pueden compartir una fecha porque se divide el bloque de ese día; no se planifican dos desarrolladores ni ejecución simultánea. La suma diaria se mantiene dentro del límite.
+
+| ID | Fechas de 2026 | Horas | Tarea / trazabilidad |
+|---|---|---:|---|
+| T01 | 28/09–29/09 | 6 | Alcance del trimestre, flujo individual y raíz Git; DEC-04/05/06 |
+| T02 | 30/09–02/10 | 8 | ADR-009/010/011 y decisiones de infraestructura; E0-09 |
+| T03 | 02/10–09/10 | 12 | Herramientas, Laravel modular y configuración de calidad; E0-03 |
+| T04 | 09/10–20/10 | 20 | Workspace Angular: tres apps, cinco libs, SSR/PWA, strict y builds; E0-04 |
+| T05 | 20/10–26/10 | 12 | Variables de ejemplo, Docker y arranque limpio integrado; E0-02 |
+| T06 | 26/10–28/10 | 8 | Workflows, reglas GitHub y CI; E0-01 |
+| T07 | 29/10–02/11 | 8 | Contrato, patrones MFA, cliente generado y verificación; E0-05/A09 |
+| T08 | 02/11–11/11 | 20 | Integración Shared, migraciones y pruebas; E0-06 |
+| T09 | 11/11–16/11 | 10 | Idempotencia concurrente, recuperación y replay; A03 |
+| T10 | 16/11–18/11 | 6 | Outbox, fallos de consumidores y pruebas; A05/A06 |
+| T11 | 18/11–19/11 | 4 | Errores, trace ID, configuración y auditoría; A08/A10 |
+| T12 | 20/11–25/11 | 12 | Integración Identidad y MFA; E0-07 |
+| T13 | 26/11–27/11 | 6 | Guards, autorización, revocación y cambio MFA; A04/A07 |
+| T14 | 30/11–10/12 | 20 | Componentes base, contraste, teclado y accesibilidad; E0-10/A11 |
+| T15 | 10/12–21/12 | 20 | Login panel/motorizado, QR, interceptores y pruebas; E0-08 |
+| T16 | 21/12–23/12 | 8 | Aceptación, regresiones y planificación posterior |
+| Reserva | 24/12 | 3 disponibles | No se asignan nuevas funciones; 25/12 sin trabajo; corte administrativo 26/12 |
+| **Total tareas** | | **180** | **172 h de construcción/correcciones + 8 h de validación final** |
+
+El [CSV de tareas](cronograma-3-meses.csv) contiene dependencias, responsable, tipo de trabajo y criterio de salida de cada fila. Todas figuran como **Propuesto**, no como ejecutadas o aceptadas.
+
+La planificación resuelve una dependencia práctica del backlog antiguo: el «entorno completo» necesita los esqueletos Laravel/Angular que allí se programaban después. Ahora primero se preparan las herramientas/esqueletos, luego se demuestra el arranque conjunto y se cierra CI. El repositorio local ya existe; no se repite su creación como si partiera de cero.
+
+E0-06 solo puede aceptarse tras T11 y E0-07 tras T13. T07 verifica las operaciones ya implementadas e identifica contratos futuros; no debe declarar implementadas categorías/pedidos por figurar en OpenAPI. Los contratos futuros se añaden a la prueba de conformidad cuando se implementan.
+
+## 5. Cadencia individual y revisiones
+
+Se propone un flujo individual con entregas quincenales, límite de **una tarea de implementación en curso** y revisión semanal. No se simulan roles independientes ni revisión cruzada entre personas que no existen.
+
+| Momento | Tiempo de gestión | Resultado |
+|---|---:|---|
+| Inicio de semana | 20 min | Elegir tareas según horas y dependencias reales |
+| Cierre de cada bloque diario | 5 min | Horas, evidencia, impedimentos y siguiente paso |
+| Revisión de cada viernes disponible | 30 min | Demo o evidencia, desviación de horas y ajuste |
+| Revisión quincenal | 45 min dentro de la bolsa de gestión | Aceptar entregables y recalibrar estimaciones |
+| Cierre del trimestre | Incluido en T16 | Informe de resultado real, pendientes y siguiente incremento |
+
+Revisiones quincenales propuestas: **09/10, 23/10, 06/11, 20/11, 04/12 y 18/12**; aceptación final objetivo **23/12**. Se reserva el 24/12 para incidencias. Las ceremonias/documentación transversal usan la bolsa de 61 h; no se suman por encima de las 20 h semanales.
+
+ADR-004 exige una segunda persona que apruebe PRs. Adaptarlo requiere un **nuevo ADR propuesto y decisión de Cristhian**, conservando el histórico. Propuesta: PR, auto-revisión identificada como tal, checks obligatorios y evidencias; revisión externa puntual cuando esté disponible. No se han cambiado protecciones remotas ni se ha dado por aprobado ese flujo.
+
+## 6. Definition of Ready y Done
+
+Una tarea entra en ejecución con criterio de salida, dependencias resueltas, decisión necesaria registrada y estimación revisada. Las compras/credenciales necesarias no se dan por existentes; si bloquean una integración, se adelanta otra tarea independiente y se registra el bloqueo.
+
+Para aceptar una tarea:
+
+- Código integrado mediante el flujo aprobado, con auto-revisión o revisión real documentada, sin describir una como la otra.
+- Checks relevantes verdes: formato, tipos, fronteras, contrato y build; pruebas MySQL cuando afecta persistencia/concurrencia.
+- Casos de error, reintento y autorización comprobados según el cambio. Un mock no sustituye la integración real.
+- Cambios en docs y contratos trazables; horas reales y evidencia enlazadas al ID de la tarea.
+- Secretos fuera del repositorio; datos sintéticos en pruebas y entornos de validación.
+- Cristhian acepta el criterio de salida. Una tarea que falla queda pendiente; no se considera terminada al llegar su fecha.
+
+Seguridad, accesibilidad y pruebas se aplican a cada incremento; no se reservan todas para el final. La aceptación de fundaciones tampoco constituye una certificación global ASVS/WCAG o legal del futuro producto.
+
+## 7. Trazabilidad del alcance completo
+
+El [backlog original](backlog.csv) se conserva como línea base histórica: responsables BE/FE y sprints S0–S6 **no son asignaciones actuales**. [backlog-replanificado.csv](backlog-replanificado.csv) conserva las 88 historias, prioridades, puntos, dependencias y criterios originales; añade el responsable actual, fechas propuestas solo para E0 y evidencia pendiente. Las referencias antiguas a «ambos», aprobación independiente y cuentas contratadas requieren adaptar sus criterios al tomar las decisiones del 11.
+
+| Etapa propuesta | Historias/puntos de referencia | Programación actual |
 |---|---|---|
-| 01 Visión y requisitos de calidad | Qué, para quién, con qué calidad; parámetros operativos | v1.1 cerrado |
-| 02 Modelo de dominio | 10 módulos, vocabulario, máquina de estados, eventos | v1.0 cerrado |
-| ADR-001 a 008 | Angular, Laravel, MySQL, GitHub, monolito modular, eventos/outbox, Reverb, PWA offline | Aceptados |
-| 03 Arquitectura (arc42 + C4) | Contexto, contenedores, componentes, escenarios, despliegue, transversales | v1.0 cerrado |
-| 04 Modelo de datos | 39 tablas MySQL, consultas críticas, retención, orden de migraciones | v1.0 cerrado (+ adenda) |
-| 05 Diseño UX | Taxonomía, tienda, checkout, panel, app motorizado, design system, métricas | v1.0 cerrado |
-| 06 Repositorio y pipeline | Estructura del monorepo, Docker, CI, guía de arranque | Listo; se cierra al completar §7 del propio documento |
-| 07 Bloque 1 (Shared + Identidad) | Código base e instrucciones de integración | Entregado; se usa en Sprint 0 |
+| Fundaciones E0 | 10 / 35 | Primer trimestre; T01–T16 incluyen correcciones adicionales |
+| Catálogo/Inventario E1 | 11 / 62 | Posterior, sin fecha comprometida |
+| Pedidos/Zonas/Clientes E2 | 11 / 61 | Posterior, depende de Catálogo/Inventario |
+| Riesgo/Fulfillment/Notificaciones E3 | 11 / 75 | Posterior, depende del flujo de pedidos |
+| Motorizado/Cobranza E4 | 10 / 65 | Posterior, requiere idempotencia, rutas y caja |
+| Tiempo real/calidad/operación E5 | 12 / 67 | Posterior; sus controles aplicables se incorporan antes a cada incremento |
+| Lanzamiento E6 | 6 / 21 | Sin fecha; requiere flujo completo aceptado |
+| Cumplimiento E7 fase 1 | 16 / 46 | Transversal; antes de cada funcionalidad afectada y de cualquier lanzamiento |
+| Reseñas E7-07 fase 1.1 | 1 / 8 | Sin compromiso; «fase 1.1» no significa automáticamente mes 4 |
+| **Total** | **88 / 440** | **432 de fase 1 + 8 de fase 1.1** |
 
-### 1.2 Pendiente (se produce dentro del proyecto, en Sprint 0 y 5)
+Los puntos de E7 se contabilizan aparte de E0; redactar ADRs no equivale a implementar Sentry/Linear/alertas ni se marcan esas historias como completadas en el trimestre. E7-11/16 definen controles transversales: las pruebas del bloque inicial no cierran todos sus criterios de producto.
 
-| Doc | Contenido | Cuándo | Quién |
-|---|---|---|---|
-| ADR-009 | Despliegue (VPS, dominio, MySQL gestionado o no, CDN opcional) y proveedor de mapas | Sprint 0 | Backend + dueño |
-| ADR-010 | Observabilidad (logs, métricas, alertas, uptime) | Sprint 0 | Backend |
-| ADR-011 | Proveedor de correo saliente | Sprint 0 | Backend + dueño |
-| Contratos OpenAPI v0.3–v0.6 | Un incremento por sprint, antes de codificar | Cada sprint | Ambos devs |
-| Runbooks | Despliegue, rollback, restauración, incidente de datos, caída de Reverb, caja con diferencia | Sprint 5 | Backend |
-| Guías de usuario (1 página c/u) | Administrador, almacén, motorizado | Semana 12 | Frontend + dueño |
-| Política de privacidad y términos | Textos legales para la tienda | Sprint 5 | Dueño (revisión legal recomendada) |
-| Plan de pruebas de aceptación | Casos por recorrido crítico para el piloto | Sprint 5 | Dueño + frontend |
+## 8. Condiciones para un MVP de ventas y para lanzamiento
 
-No hay documentación técnica de diseño pendiente: todo lo que el equipo necesita para empezar está aprobado.
+Si Cristhian decide que diciembre debe incluir ventas, el próximo ejercicio debe separar historias y estimar un recorrido mínimo: catálogo → stock/cupo atómico → pedido → confirmación → preparación → entrega/cobro → conciliación → devoluciones/reclamaciones. Deben incluirse autenticación, auditoría, datos personales, respaldo y operación manual de contingencia. Cualquier simplificación de offline/tiempo real requiere revisar ADR-007/008 y aceptación de su impacto.
 
-## 2. Prerrequisitos para iniciar el desarrollo
+**No hay un MVP transaccional estimado y aprobado en 180 h.** Este documento no promete uno. Para conservar el alcance completo hay que ampliar plazo/capacidad; para conservar los tres meses hay que aceptar el incremento propuesto o aprobar otro alcance reestimado.
 
-### 2.1 Del dueño (antes del día 1)
+El lanzamiento comercial requiere evidencias de stock/cupo sin duplicados, cobros y caja íntegros, permisos por objeto, recuperación/rollback ensayados, funcionamiento de operación sin conexión según el alcance aprobado, datos/textos definitivos, atención de reclamos y aceptación de usuarios. Llegar al 26/12 no sustituye esos criterios.
 
-| # | Prerrequisito | Por qué bloquea |
-|---|---|---|
-| 1 | **Fecha de inicio** confirmada | Convierte las semanas del roadmap en fechas |
-| 2 | **Decisión de equipo** (§3): 2 devs en 5 meses o 3 devs en 3 meses | Define qué backlog se compromete |
-| 3 | Cuenta de GitHub (organización o personal) y usuarios de los desarrolladores | Sprint 0 arranca creando el repositorio |
-| 4 | Dominio registrado (p. ej. `dtoolimpieza.pe` o `.com`) | Necesario para TLS, correo y SEO desde staging |
-| 5 | Proveedor de VPS elegido y cuenta creada (presupuesto orientativo: US$ 20–40/mes) | ADR-009; staging debe existir desde Sprint 1 |
-| 6 | Correo corporativo para envíos transaccionales (p. ej. `pedidos@dominio`) | ADR-011 |
-| 7 | Polígono de la zona de cobertura (límites reales del distrito que atenderás) | Seeder de Zonas en Sprint 2 |
-| 8 | Catálogo inicial en hoja de cálculo: producto, marca, categoría, presentación, SKU, precio hogar, precio negocio, existencia | Carga en Sprint 1 (ejemplo) y Semana 12 (real) |
-| 9 | Fotos de productos (una por producto como mínimo) | Tienda navegable |
-| 10 | Dos horas semanales reservadas para review y decisiones | Scrum no funciona sin el Product Owner presente |
+## 9. Qué se decide primero
 
-### 2.2 Técnicos (cada desarrollador, día 1)
+Ya están confirmados **fecha de inicio, responsable único y dedicación de 20 h/semana**. Queda decidir **si se acepta fundaciones como resultado del trimestre o si se necesita redefinir un MVP de ventas**, y después el flujo de revisión individual. El detalle y las demás decisiones están en el [11](11-decisiones-pendientes.md).
 
-- Docker Desktop, Git, Node 22 LTS, editor con EditorConfig y ESLint/PHP Intelephense.
-- Cuenta de GitHub con 2FA activado (requisito de seguridad del propio proyecto).
-- Lectura obligatoria antes del Sprint 0: documentos 01, 02, 03 (§5, §6, §8), 05 y los 8 ADRs. Tiempo estimado: medio día. Se verifica con una sesión de preguntas el día 1.
-
-### 2.3 Legales y operativos (no bloquean el código, sí el lanzamiento)
-
-- Registro del banco de datos personales ante la ANPD (trámite gratuito en línea; iniciarlo en Sprint 3 para tener la constancia en la Semana 12).
-- Política de privacidad y términos redactados (idealmente revisados por un abogado).
-- Consulta con contador sobre emisión de comprobantes: fuera del sistema, pero la venta sí los requiere.
-- Celulares Android de los 3 motorizados con Chrome actualizado y datos móviles.
-- Impresora en almacén para la nota de pedido (térmica de 80 mm o cualquier impresora A5).
-- Definir el esquema de turnos de los motorizados (para configurar cupos por franja).
-
-## 3. Capacidad y decisión de equipo
-
-Escala: **1 punto ≈ medio día de trabajo enfocado.** Backlog completo tras el 09: **88 historias, 432 puntos en fase 1** (≈ 215 días-persona) más 8 en fase 1.1. Should prescindibles en el lanzamiento: 17 puntos (E2-11, E5-04, E5-09, E6-06). **Must = 415 puntos.** Ver 09 §8: incluso en la Opción A hay que mover historias no legales a la fase 1.1 en la planning del S0.
-
-Capacidad realista por desarrollador y sprint de 2 semanas: 10 días laborables − ceremonias, revisión de código e imprevistos ≈ **8 días efectivos ≈ 16 puntos**. En 12 semanas (Sprint 0 de 1 semana + 5 sprints + Semana 12 de lanzamiento) ≈ **~90 puntos por desarrollador**.
-
-| Opción | Equipo | Capacidad | Resultado |
-|---|---|---|---|
-| **A · Recomendada** | Backend + Frontend + **Dev 3 full-stack** (Sprints 1–5, enfocado en el panel) | ~270 puntos + reparto del panel | Alcance Must completo en 12 semanas, **ajustado**: los Should solo si sobra tiempo. Requiere disciplina en el contrato-primero y cero cambios de alcance. |
-| **B** | Backend + Frontend | ~180 puntos en 12 semanas | Alcance Must completo en **20 semanas** (Sprints 0–8). Mismo backlog, sprints reasignados. |
-| **C** | Backend + Frontend, 12 semanas | ~180 puntos | Requiere recortar ~50 % del Must: sin app offline completa, panel de rutas sin mapa, sin tiempo real, sin cuenta ni ARCO automatizados. **No recomendada**: quita las piezas que evitan pérdidas en contraentrega. |
-
-> Nota: incluso en la Opción A el plan no tiene holgura propia; la holgura es la lista Should (17 pts) y la Semana 12, que está dedicada a estabilizar y lanzar, no a construir. Si en el Sprint 2 la velocidad real está por debajo de lo previsto, se decide en la review de ese sprint mover historias a la fase 1.1 (mes 4), no acelerar.
-
-## 4. Roadmap (12 semanas, Opción A)
-
-Semana 1 = fecha de inicio. Las fechas exactas se rellenan al confirmarla.
-
-```
-Sem  1        2   3        4   5        6   7        8   9        10  11       12
-     ┌──S0──┐ ┌────S1────┐ ┌────S2────┐ ┌────S3────┐ ┌────S4────┐ ┌────S5────┐ ┌─Lanz─┐
-     Fundac.  Catálogo +   Checkout     Riesgo +     Motorizado   Tiempo real  Piloto
-     y login  Inventario   completo     Preparación  offline +    Calidad      Go-live
-              Tienda       Panel        Rutas        Caja         Seguridad
-              navegable    pedidos      Correos                   Usuarios
-Hito:  H0       H1           H2           H3           H4           H5           H6
-```
-
-| Sprint | Semanas | Objetivo del sprint (Sprint Goal) | Hito demostrable en la review |
-|---|---|---|---|
-| **S0** | 1 | Entorno, CI, Shared e Identidad integrados, design system base, ADRs 009–011 | **H0:** los tres devs hacen `make up`, CI verde, login en panel y app con MFA |
-| **S1** | 2–3 | Catálogo e Inventario con reservas concurrentes; tienda navegable con SSR; panel de catálogo e inventario | **H1:** el dueño navega la tienda con 20 SKU reales, ve "agotado" al reservar la última unidad, edita un precio desde el panel |
-| **S2** | 4–5 | Zonas, clientes, pedidos: checkout completo con mapa, franjas con cupo, método de pago y vuelto; consulta "Mi pedido"; panel de pedidos | **H2:** un pedido real de punta a punta desde el celular hasta la lista del panel; reintento no duplica |
-| **S3** | 6–7 | Riesgo (auto/manual), preparación con nota impresa, rutas con mapa y vuelto por ruta, correos, pantalla Hoy, configuración | **H3:** un pedido nuevo cae en revisión, el dueño lo confirma con el botón, almacén lo prepara e imprime, el dueño lo pone en una ruta |
-| **S4** | 8–9 | App del motorizado con offline, entregas y fallos, cobros inmutables, cierre de caja con diferencias, devoluciones | **H4:** un motorizado entrega 5 pedidos con datos apagados, sincroniza, declara caja; una diferencia exige justificación |
-| **S5** | 10–11 | Tiempo real, avisos, "avísame", SEO, rendimiento, seguridad ASVS L2, ARCO, cuenta opcional, pruebas con usuarios, runbooks, observabilidad | **H5:** badge de stock cambia en vivo; Lighthouse verde; checklist ASVS firmado; informe de pruebas con usuarios |
-| **Lanz.** | 12 | Producción, carga real del catálogo, ANPD, capacitación, piloto de 3 días, go-live | **H6:** primera semana operando con pedidos reales y métricas del 01 §5 midiéndose |
-
-**Opción B (2 devs, 20 semanas):** mismos objetivos; S1–S5 pasan a durar 3 semanas cada uno y se añade un S6 de 2 semanas para lo que quede; lanzamiento en la semana 20.
-
-### Dependencias críticas (ruta crítica)
-Identidad → Catálogo/Inventario → Pedidos → Riesgo → Fulfillment → Cobranza → Tiempo real → Lanzamiento. El frontend nunca espera al backend gracias al contrato-primero y al mock (`prism`), pero **la integración real de cada módulo ocurre en el mismo sprint**: si el backend de Pedidos se atrasa en S2, la demo H2 se hace con mock y se marca deuda.
-
-## 5. Marco Scrum
-
-### 5.1 Roles
-
-| Rol | Quién | Responsabilidades |
-|---|---|---|
-| **Product Owner** | Cristhian Rodriguez Ruiz | Prioriza el backlog, acepta o rechaza historias en la review, responde dudas de negocio en ≤ 24 h, aporta datos (catálogo, zona, textos) |
-| **Scrum Master** (rotativo) | Un dev por sprint | Facilita ceremonias, retira impedimentos, cuida que las reglas del 06 se cumplan (PR pequeños, contrato-primero) |
-| **Equipo de desarrollo** | Backend, Frontend, Dev 3 (Opción A) | Estima, se compromete con el Sprint Goal, revisa cruzado, entrega incrementos que cumplen la Definition of Done |
-
-Sin gerente de proyecto: con 3–4 personas, Scrum puro es suficiente si las ceremonias se respetan.
-
-### 5.2 Eventos
-
-| Evento | Cuándo | Duración | Salida |
-|---|---|---|---|
-| **Sprint Planning** | Lunes de inicio de sprint | 2 h | Sprint Goal + historias comprometidas (≤ capacidad) + contrato OpenAPI del sprint identificado |
-| **Daily** | Todos los días laborables | 15 min (async por escrito en el canal si alguien no puede) | Impedimentos visibles |
-| **Refinamiento** | Miércoles de la semana 1 del sprint | 1 h | Historias del siguiente sprint con criterios claros y estimadas (DoR) |
-| **Sprint Review** | Viernes de la semana 2 | 1 h | Demo del hito con datos reales al PO; historias aceptadas o devueltas; ajuste del backlog |
-| **Retrospectiva** | Viernes de la semana 2, tras la review | 45 min | 1–3 mejoras concretas con responsable |
-| **Revisión de contrato** | Ad hoc, al inicio de cada historia con API nueva | 20 min | PR de `openapi.yaml` aprobado por ambos lados antes de codificar |
-
-### 5.3 Artefactos
-
-- **Product Backlog:** `backlog.csv` importado a **Linear** (decisión del dueño, 09 §6): un Team, un Project por épica, Cycles de 2 semanas = sprints, etiquetas por módulo y MoSCoW, integración con GitHub por clave de issue y conector con Claude para preparar sprints y descomponer historias.
-- **Sprint Backlog:** vista filtrada por sprint; cada historia se divide en tareas técnicas (subtareas del issue) en la planning.
-- **Incremento:** lo que está en `main` al final del sprint, desplegado en staging y demostrado.
-- **Burndown:** gráfico automático de GitHub Projects por puntos; se revisa en la daily del viernes.
-
-### 5.4 Definition of Ready (una historia entra a un sprint solo si…)
-- Criterios de aceptación escritos y entendidos por quien la hará.
-- Contrato OpenAPI/evento identificado (o marcado "no aplica").
-- Dependencias del CSV resueltas o planificadas en el mismo sprint con orden claro.
-- Estimada en puntos por el equipo (no por una sola persona).
-- Pantalla referenciada en el 05 si tiene UI.
-
-### 5.5 Definition of Done (una historia está terminada solo si…)
-- Código en `main` vía PR ≤ 400 líneas con revisión cruzada aprobada.
-- CI verde: lint, tipos, deptrac, pruebas unitarias e integración con MySQL real, contrato verificado, cliente regenerado, Lighthouse (si toca tienda), auditorías de dependencias.
-- Pruebas escritas según el 03 §8.8 (dominio unitario; infraestructura con BD real; E2E si es recorrido crítico).
-- Errores devuelven Problem Details con `codigo` estable y el frontend los traduce.
-- Acciones sobre pedidos, cobros, precios y configuración quedan en `sys_auditoria`.
-- Textos en español de Perú, accesibles (etiquetas, foco, contraste), sin datos personales en logs.
-- Desplegada en staging y demostrada al PO (o demostrable en la review).
-- Documentación tocada si cambió un contrato, un evento o una decisión (ADR).
-
-### 5.6 Métricas del proceso (se leen en cada retro)
-- Velocidad (puntos hechos vs. comprometidos).
-- Lead time de PR (apertura → merge; meta ≤ 24 h).
-- Tasa de PR devueltos por CI rojo.
-- Deuda declarada (historias con "mock" o "TODO" aceptadas).
-- DORA desde S3: frecuencia de despliegue a staging, tasa de fallo de cambios, tiempo de recuperación.
-
-## 6. Backlog por sprint (resumen; detalle en `backlog.csv`)
-
-| Sprint | Historias | Puntos | Backend | Frontend / Dev 3 |
-|---|---|---|---|---|
-| S0 | E0-01…E0-10 | 35 | Shared, Identidad, ADRs, deptrac | Workspace, design system, login, cliente API |
-| S1 | E1-01…E1-11 | 62 | Catálogo, Inventario, reservas concurrentes, eventos, API tienda, seeders | Tienda navegable SSR; panel catálogo e inventario |
-| S2 | E2-01…E2-11 | 61 | Zonas, Clientes, crear pedido todo-o-nada, estados, consulta pública | Carrito, checkout 3 pasos, Mi pedido; panel pedidos y cliente |
-| S3 | E3-01…E3-11 | 75 | Riesgo, preparación y nota, rutas, correos | Hoy, revisión, preparación, rutas con mapa, configuración |
-| S4 | E4-01…E4-10 | 65 | Resultado de parada idempotente, cobros, cierre de caja | App motorizado offline completa; panel caja y devoluciones |
-| S5 | E5-01…E5-12 | 67 | Reverb, avisos, seguridad, ARCO, runbooks, observabilidad | Realtime, avísame, SEO, rendimiento, cuenta, pruebas con usuarios |
-| Lanz. | E6-01…E6-06 | 21 | Producción, importador CSV | Capacitación, guías, piloto |
-| E7 (09) | E7-01…E7-17 | 46 (+8 en fase 1.1) | Reclamaciones, reembolsos, rate limits, Sentry, afirmaciones | Legal, cookies, analítica, accesibilidad verificable, Linear |
-| **Total** | **88** | **432 en fase 1 + 8 en fase 1.1** | | |
-
-Épicas: E0 Fundaciones · E1 Catálogo/Inventario · E2 Pedidos (Zonas, Clientes) · E3 Riesgo/Fulfillment/Notificaciones · E4 Motorizado/Cobranza · E5 Tiempo real/Calidad/Seguridad · E6 Lanzamiento.
-
-## 7. Riesgos del plan y respuesta
-
-| Riesgo | Prob. | Impacto | Respuesta |
-|---|---|---|---|
-| Alcance > capacidad (§3) | Alta si Opción C | Alto | Elegir A o B antes del día 1; congelar alcance; cambios van a fase 1.1 |
-| Ausencia de un dev en un equipo de 2–3 | Media | Alto | Conocimiento repartido por revisión cruzada; documentación en repo; Sprint Goal se reduce, no se estira |
-| PO no disponible para reviews | Media | Alto | 2 h semanales fijas en calendario; decisiones por escrito en el issue |
-| Datos del negocio llegan tarde (catálogo, fotos, polígono) | Alta | Medio | Prerrequisitos §2.1 con fecha; seeders de ejemplo permiten avanzar |
-| Offline del motorizado más complejo de lo previsto | Media | Alto | Historia E4-07 de 13 pts aislada en su librería; prueba E2E desde el inicio de S4; plan B: sincronización manual "Enviar" con reintentos |
-| Cambios de versión de Angular/Laravel durante el proyecto | Baja | Bajo | Versiones fijadas en S0; actualizar solo en S5 si es menor |
-| Proveedor de mapas con límites gratuitos | Media | Bajo | Adaptador intercambiable; captura manual de coordenadas como respaldo |
-
-## 8. Fase 1.1 (mes 4, post-lanzamiento; no comprometida)
-
-Lo que naturalmente sigue al go-live y donde caen las historias que se muevan: cuenta de cliente completa, "volver a pedir", "avísame" si quedó fuera, ficha de cliente ampliada, optimización real de rutas, reporte de ventas y márgenes, importador de existencias periódico, mejoras de las pruebas con usuarios, y la preparación de la fase 2 (segundo distrito).
-
-## 9. Lo que necesito de ti para cerrar este documento
-
-1. **Fecha de inicio** → convierto el roadmap a fechas reales y genero el calendario de ceremonias.
-2. **Opción de equipo (A, B o C)** → reasigno el backlog por sprint si es B.
-3. Confirmar los prerrequisitos de §2.1 que ya tienes resueltos.
+El plan se recalcula después de las dos primeras semanas usando horas reales y al final de cada quincena. Los documentos 06/07 solo se cierran con evidencia; el 09 sigue pendiente de aprobación. No se da por aprobado un documento por actualizar sus fechas.

@@ -9,6 +9,8 @@
 
 > Cada tabla pertenece a un módulo y lleva su prefijo. **No hay claves foráneas entre módulos**: las referencias cruzadas guardan el identificador público (ULID) del otro módulo y la integridad la garantiza el dueño. Dentro de un módulo sí hay FK.
 
+> Revisión 26/09/2026: el texto enumera **42 tablas propias** contando `not_avisos_stock` y `rec_reclamaciones`, excluyendo tablas estándar del framework. Solo seis están declaradas en las migraciones presentes. La adenda 16c deriva del documento 09 aún en borrador; necesita aprobación y definición del módulo dueño de reclamaciones. Ver 10 y 11.
+
 ## Convenciones (ADR-003)
 
 | Aspecto | Regla |

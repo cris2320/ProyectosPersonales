@@ -3,14 +3,18 @@
 | Campo | Valor |
 |---|---|
 | Proyecto | D'Too Limpieza |
-| Estado | Borrador v0.1 — se cierra cuando ambos desarrolladores tengan el entorno corriendo |
+| Estado | Borrador v0.1 — pendiente de entorno y CI verificados por Cristhian, único desarrollador confirmado el 26/09/2026 |
 | Fecha | 2026-09-14 |
 | Depende de | ADR-001 a ADR-006 · 03 §5, §7 · 04 §15 |
 | Para | Desarrollador backend (§3), desarrollador frontend (§4), dueño (§2) |
 
+**Antes de ejecutar esta guía en Windows:** completar [12 · Prerrequisitos e instalación](12-prerrequisitos-windows.md). El arranque está autorizado por Cristhian; el cierre de §7 requiere evidencias. Los comandos Bash de esta guía se ejecutan en Ubuntu/WSL, no directamente en PowerShell. Las versiones exactas se fijarán al integrar; usar la matriz del 12 en lugar de instalar cualquier versión antigua de Node 22.
+
 > Este documento acompaña al paquete `dtoo-limpieza/` que contiene la estructura del repositorio, la configuración de Docker, el CI de GitHub Actions, el contrato OpenAPI inicial, la verificación de fronteras entre módulos y el primer código del dominio. Lo que **no** contiene es el esqueleto generado por los instaladores de Laravel y Angular: eso lo crea cada desarrollador con los comandos de §3 y §4 (toma unos 30 minutos por lado).
 
 ---
+
+> Auditoría 26/09/2026: varios archivos que §1 anuncia no están en esta copia. Las instrucciones separadas para backend/frontend corresponden ahora a una sola persona; también falta adaptar la revisión de ADR-004. Consultar [10](10-auditoria-del-repositorio.md) antes de integrar y [08](08-roadmap-y-plan-scrum.md) para fechas. Ninguna casilla de §7 se marca como cumplida en esta revisión.
 
 ## 1. Qué hay en el paquete
 
