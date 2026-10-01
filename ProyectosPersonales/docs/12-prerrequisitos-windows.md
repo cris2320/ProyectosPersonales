@@ -1,6 +1,27 @@
 # 12 · Prerrequisitos e instalación del entorno Windows
 
-Fecha: 26/09/2026. Responsable: Cristhian Rodriguez Ruiz. Esta guía prepara la máquina antes de integrar Laravel/Angular. Los comandos de instalación siguientes son instrucciones para ejecutar por pasos; no se han ejecutado durante esta revisión.
+Revisión inicial del equipo: 26/09/2026. Actualización de arquitectura: 30/09/2026. Responsable: Cristhian Rodriguez Ruiz. Esta guía prepara la máquina antes de integrar Laravel/Angular. Los comandos de instalación siguientes son instrucciones para ejecutar por pasos; no se han ejecutado durante esta revisión.
+
+> Seguimiento al 30/09/2026: S01 está en curso; los prerrequisitos mínimos de esta guía pueden adelantarse para verificar dependencias. S02 completa sigue planificada para 06/10–12/10. Registrar únicamente comprobaciones ejecutadas en el [13](13-seguimiento-scrum.md).
+
+## 0. Ajuste para servicios independientes
+
+La dirección confirmada en [ADR-013](adr/ADR-013-servicios-independientes.md) cambia el despliegue objetivo, pero **los programas base para instalar siguen siendo Git, VS Code, WSL 2/Ubuntu y Docker Desktop**. Cada servicio tendrá su propio proyecto Laravel, dependencias, imagen y base/usuario; no es necesario instalar PHP/MySQL varias veces en Windows.
+
+Infraestructura adicional propuesta, descargada como contenedores cuando se prepare el nuevo Compose:
+
+| Componente | Uso | Estado |
+|---|---|---|
+| RabbitMQ | Broker candidato para eventos entre servicios | Validar cliente PHP, versión y consumo en S01/S02; no instalado |
+| OpenTelemetry Collector | Recibir/exportar telemetría de los servicios | Propuesto; no instalado |
+| Jaeger o Tempo | Visualizar trazas distribuidas | Elegir uno en ADR-010; no instalar ambos por defecto |
+| Herramienta de carga, por ejemplo k6 | Medir tráfico, latencia y aislamiento | Seleccionar/fijar imagen antes de S09 |
+
+Redis sigue siendo útil para caché y colas internas; Horizon no se da por compatible con el broker de eventos. Las dependencias OpenTelemetry de PHP se resolverán en las imágenes de los servicios, con versiones verificadas. Kubernetes, Kafka y herramientas nativas adicionales no son prerrequisitos del primer incremento.
+
+Usar perfiles Compose para levantar solo los servicios del incremento. La recomendación de 16 GB del equipo es orientativa y debe medirse con broker/telemetría activos; no hay RAM verificada ni consumo real observado. Bases, colas, visor y collector se mantendrán en red interna; interfaces locales de diagnóstico se vincularán a loopback. Los puertos listados más abajo describen el Compose anterior, no el destino aprobado.
+
+El Compose y Dockerfiles actuales aún corresponden al backend único. No se han modificado, instalado programas ni generado servicios durante esta revisión. El [08](08-roadmap-y-plan-scrum.md) programa su sustitución verificable; `make up` todavía no acredita el nuevo diseño.
 
 ## 1. Qué está comprobado en tu equipo
 
@@ -111,7 +132,7 @@ La carpeta actual se ve desde Ubuntu como:
 /mnt/c/Users/repre/ProyectosPersonales/ProyectosPersonales
 ```
 
-La raíz Git está en la carpeta superior. No mover ni reemplazar esta copia durante la instalación: contiene cambios de documentación sin commit. Docker recomienda almacenar el código usado por contenedores Linux en el sistema de archivos Linux para mejorar el rendimiento; se puede preparar esa copia después de preservar los cambios. [Guía de Docker con WSL](https://docs.docker.com/desktop/features/wsl/).
+La raíz Git está en la carpeta superior. Antes de mover o crear otra copia, comprobar `git status` y preservar los cambios locales existentes. Docker recomienda almacenar el código usado por contenedores Linux en el sistema de archivos Linux para mejorar el rendimiento; se puede preparar esa copia después de preservar los cambios. [Guía de Docker con WSL](https://docs.docker.com/desktop/features/wsl/).
 
 ### Paso 5 · Validar el entorno
 
@@ -172,4 +193,4 @@ Puertos locales previstos en Compose: `3306`, `6379`, `8080`, `8085`, `4200–42
 - [ ] Cambios del repositorio preservados; identidad Git configurada.
 - [ ] Acceso GitHub preparado para la posterior configuración de CI.
 
-Después de este checklist comienza la integración de esqueletos y archivos faltantes del documento 06. La aprobación para comenzar no equivale a cerrar las pruebas del 07 ni los requisitos de lanzamiento del 09.
+Después de este checklist se preparan los esqueletos independientes del ADR-013 y se adapta la guía 06; el orden vigente es S01–S10 del 08. La aprobación para comenzar no equivale a cerrar las pruebas del 07 ni los requisitos de lanzamiento del 09.

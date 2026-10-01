@@ -1,8 +1,10 @@
 # ADR-005 · Monolito modular en Laravel con fronteras verificadas
 
+> Registro histórico. Ver [ADR-013](ADR-013-servicios-independientes.md): servicios independientes, datos propios y consistencia distribuida. Las promesas anteriores de extracción sin rediseño o transacción compartida entre servicios no son vigentes.
+
 | Campo | Valor |
 |---|---|
-| Estado | Aceptado |
+| Estado | Reemplazado por ADR-013 el 30/09/2026 |
 | Fecha | 2026-09-14 |
 | Decisores | Desarrollador backend, dueño |
 | Relacionado con | 01 §6.7 · 02 §3 (mapa de contextos) · ADR-002 |

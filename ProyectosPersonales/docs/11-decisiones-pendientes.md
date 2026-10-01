@@ -1,10 +1,20 @@
 # 11 · Documentos abiertos y decisiones finales
 
-Fecha de corte: **26/09/2026**. Decisor y responsable de desarrollo/pruebas: **Cristhian Rodriguez Ruiz**.
+Fecha de actualización: **30/09/2026**; auditoría inicial del 26/09. Decisor y responsable de desarrollo/pruebas: **Cristhian Rodriguez Ruiz**.
 
 ## Autorización para iniciar
 
 Cristhian indicó: «dale todo aprobado a las documentaciones si ya no falta nada por agregar e iniciemos con el proyecto, pero primero dame todos los prerequisitos». Queda **autorizada la preparación del entorno y el inicio del trabajo previsto**. La condición de cierre integral aún no se cumple: faltan datos de negocio, proveedores, resolución de contradicciones y evidencias de pruebas descritas abajo. Por ello no se cambian todos los estados a «cerrado» ni se dan por aprobadas decisiones todavía sin contenido concreto. La instalación inicial está detallada en el [12](12-prerrequisitos-windows.md); no se ha instalado software en esta revisión.
+
+## Decisión arquitectónica del 30/09/2026
+
+Cristhian confirma separar servicios para escalar y disponer de trazabilidad por servicio. Se registra en [ADR-013](adr/ADR-013-servicios-independientes.md), que sustituye ADR-005 y parcialmente ADR-006. La independencia es una decisión del usuario; siete servicios, herramientas candidatas y el incremento mínimo de Identidad/Catálogo son una propuesta técnica, todavía sin evidencia de implementación.
+
+El [08](08-roadmap-y-plan-scrum.md) y sus CSV sustituyen la asignación anterior: 168 h de tareas desde 30/09 y 9 h de reserva enfocada. Los 88 criterios históricos se conservan, pero no se declara E0 completo ni se mantienen sus fechas anteriores. 02/04/05/06/07 requieren adaptación por incremento; los hallazgos de la auditoría siguen abiertos hasta probar las correcciones.
+
+## Autorización de ejecución del calendario · 30/09/2026
+
+Cristhian pide continuar con lo planificado y marcar cada tarea al realizarla. Se registra DEC-04 como autorización del incremento vigente, con seguimiento en [13](13-seguimiento-scrum.md). No aprueba pruebas no ejecutadas ni selecciona automáticamente proveedores. S01 está en curso; se registran fechas reales separadas del plan y evidencia por criterio.
 
 ## 1. Qué está aprobado y qué sigue en validación
 
@@ -14,13 +24,13 @@ Cristhian indicó: «dale todo aprobado a las documentaciones si ya no falta nad
 |---|---|---|
 | 01 · Visión | v1.1 cerrado | Incorporar equipo unipersonal y resolver precisión de disponibilidad/MFA; cambios de alcance requieren decisión |
 | 02 · Dominio | v1.0 cerrado | Resolver temporizadores, consumo de stock, faltantes/devoluciones y privacidad del reconocimiento por teléfono |
-| ADR-001 a ADR-008 | Aceptados | Aplicarlos y verificarlos; adaptar flujo de revisión de ADR-004 por nuevo ADR; reconciliar fuente OpenAPI 002/006 |
-| 03 · Arquitectura | v1.0 cerrado | Formalizar proveedores/despliegue y probar calidad; coherencia de presupuesto JS y fronteras |
+| ADR-001 a ADR-008 | Aprobaciones históricas; 005 sustituido y 006 parcialmente sustituido | Aplicar ADR-013; adaptar flujo individual de ADR-004; contratos por servicio |
+| 03 · Arquitectura / ADR-013 | Dirección de servicios confirmada; detalle propuesto | Validar partición, autenticación, broker, trazas, límites y despliegue independiente |
 | 04 · Datos | v1.0 con adendas | La adenda 16c depende del 09 abierto: aprobar reclamaciones/reposiciones y asignar módulo; corregir inventario a 42 tablas propias |
 | 05 · UX | v1.0 cerrado | Sin evidencia de pruebas de §9; validar prototipo con clientes, almacén y motorizados; corregir contraste y privacidad del autocompletado |
 | **06 · Entorno y pipeline** | **Borrador v0.1** | Completar entorno, archivos faltantes, builds, herramientas de calidad y CI; aportar evidencias de §7 para una persona |
 | **07 · Shared e Identidad** | **Entregado para integración** | Corregir A03–A10 del 10, ejecutar pruebas reales y CI; no está validado por haber sido entregado |
-| **08 · Roadmap** | **Borrador actualizado el 26/09** | Inicio, responsable y 20 h/semana confirmados; decidir alcance del trimestre y recalibrar con velocidad real |
+| **08 · Roadmap** | **v0.5; ejecución autorizada el 30/09** | S01 en curso; 168 h estimadas; cierres y aceptación sujetos a evidencia del 13 |
 | **09 · Cumplimiento y calidad** | **Borrador v0.1** | Decisión del dueño, correcciones del 10 A11/A12, datos del negocio, política de devoluciones y presupuesto |
 | 10 · Auditoría | Informe de evidencia al corte | Sus hallazgos se cierran con evidencia nueva; no declara código corregido |
 | 11 · Este registro | Abierto | Registrar cada decisión de Cristhian con fecha e impacto |
@@ -48,7 +58,7 @@ Cristhian indicó: «dale todo aprobado a las documentaciones si ya no falta nad
 | DEC-01 | Inicio del proyecto | 26/09/2026 | 26/09 | **Confirmado por el usuario** |
 | DEC-02 | Equipo y decisión final | Cristhian desarrolla, prueba y decide | 26/09 | **Confirmado por el usuario** |
 | DEC-03 | Horas semanales disponibles | 20 h/semana incluyendo desarrollo, pruebas y documentación | 26/09 | **Confirmado por el usuario** |
-| DEC-04 | Resultado exigido el 26/12 | Fundaciones, Shared/Identidad, componentes y login; si se exige vender, redefinir y estimar un MVP transaccional antes de comprometerlo | 02/10 | Propuesto, no aprobado |
+| DEC-04 | Resultado exigido el 26/12 | Base distribuida mínima de Identidad/Catálogo, panel mínimo, eventos, trazas y pruebas de aislamiento; no incluye venta ni E0 completo | 02/10 | **Autorizado para ejecución el 30/09/2026; aceptación técnica pendiente** |
 | DEC-05 | Regla de revisión unipersonal | PR + auto-revisión explícita + CI + evidencia; revisión externa opcional para cambios de mayor riesgo | 02/10 | Propuesto; nuevo ADR necesario |
 | DEC-06 | Raíz del proyecto y CI | Mantener carpeta actual y workflows en raíz Git con rutas explícitas, salvo decisión de reorganizar | 02/10 | Propuesto |
 | DEC-07 | Reconciliación técnica de docs | Contrato primero; alcance de idempotencia/auth; MFA/roles; presupuesto JS; correcciones del 10 | 09/10 | Pendiente |
@@ -59,6 +69,7 @@ Cristhian indicó: «dale todo aprobado a las documentaciones si ya no falta nad
 | DEC-12 | Reconocimiento y derechos del cliente | Nunca exponer nombre/dirección por conocer un teléfono; acordar verificación y canal ARCO | Antes de Clientes/checkout | Pendiente |
 | DEC-13 | Aprobación del 09 | Reembolsos/48 h, Libro, terceros, consentimientos, retención y requisitos aplicables; corregir plazos/contraste | Antes de flujos públicos | Pendiente |
 | DEC-14 | Offline, expiración y recuperación | Preservar operaciones pendientes, definir reautenticación, conflictos y contingencia | Antes de la app operativa | Pendiente |
+| DEC-16 | Separación de servicios | Despliegue, trazabilidad y escalado independientes; ADR-013 | 30/09 | **Dirección confirmada por el usuario; detalle técnico propuesto** |
 | DEC-15 | Lanzamiento | Solo con recorrido completo, pruebas, cumplimiento y operación aceptados | Tras cumplir puertas de salida | Sin fecha comprometida |
 
 Las fechas son objetivos de decisión del plan propuesto, no aprobaciones automáticas. Las compras, conexiones de servicios y cambios remotos no se han realizado en esta revisión.

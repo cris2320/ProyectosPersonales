@@ -2,11 +2,13 @@
 
 E-commerce de productos de limpieza con pago contraentrega. Angular + Laravel + MySQL.
 
-**Estado al 26/09/2026:** documentación y código inicial; todavía falta integrar los esqueletos Laravel/Angular y ejecutar CI. Cristhian Rodriguez Ruiz desarrollará, probará y decidirá el proyecto, con **20 h semanales**. El plan de tres meses abarca **26/09–26/12/2026** y propone validar las fundaciones; el lanzamiento comercial no tiene fecha comprometida.
+**Estado al 30/09/2026:** documentación y código inicial; todavía falta integrar los esqueletos Laravel/Angular y ejecutar CI. Cristhian Rodriguez Ruiz desarrollará, probará y decidirá el proyecto, con **20 h semanales**. El plan de tres meses abarca **26/09–26/12/2026** y propone validar las fundaciones; el lanzamiento comercial no tiene fecha comprometida.
 
-Consulta primero la [auditoría del repositorio](docs/10-auditoria-del-repositorio.md), las [decisiones pendientes](docs/11-decisiones-pendientes.md) y el [roadmap actualizado](docs/08-roadmap-y-plan-scrum.md). El alcance propuesto requiere la decisión final de Cristhian.
+Consulta primero la [auditoría del repositorio](docs/10-auditoria-del-repositorio.md), las [decisiones pendientes](docs/11-decisiones-pendientes.md) y el [roadmap actualizado](docs/08-roadmap-y-plan-scrum.md). La separación de servicios está confirmada en [ADR-013](docs/adr/ADR-013-servicios-independientes.md); el incremento está autorizado para ejecución desde el 30/09; las estimaciones se revisarán con evidencia.
 
 **Preparación del entorno autorizada:** empezar por [12 · Prerrequisitos e instalación en Windows](docs/12-prerrequisitos-windows.md). Los cierres técnicos siguen sujetos a sus pruebas; no se ha instalado software todavía.
+
+**Trabajo actual:** S01 (30/09–05/10), en curso. Consulta el [tablero y las fechas reales](docs/13-seguimiento-scrum.md); las tareas se completan al verificar sus criterios, sin cierres automáticos por calendario.
 
 ## Documentación
 | Doc | Contenido |
@@ -24,10 +26,13 @@ Consulta primero la [auditoría del repositorio](docs/10-auditoria-del-repositor
 | [10 Auditoría](docs/10-auditoria-del-repositorio.md) | Evidencia, brechas y correcciones priorizadas |
 | [11 Decisiones](docs/11-decisiones-pendientes.md) | Documentos abiertos y decisiones finales |
 | [12 Prerrequisitos](docs/12-prerrequisitos-windows.md) | Instalación de programas en Windows/WSL, Docker y comprobaciones |
-| [Cronograma CSV](docs/cronograma-3-meses.csv) | 16 tareas propuestas, 180 h, dependencias y aceptación |
-| [Backlog replanificado](docs/backlog-replanificado.csv) | 88 historias conservadas; responsable actual y fechas propuestas |
+| [13 Seguimiento](docs/13-seguimiento-scrum.md) | Estado, fechas reales, evidencias y próximos pasos |
+| [Cronograma CSV](docs/cronograma-3-meses.csv) | 10 tareas propuestas, 168 h y 9 h de reserva enfocada; dependencias y aceptación |
+| [Backlog replanificado](docs/backlog-replanificado.csv) | 88 historias conservadas; criterios históricos y reestimación para servicios |
 
-## Arranque rápido
+## Arranque rápido (referencia del entorno anterior)
+
+**La arquitectura objetivo es de servicios independientes. Este Compose corresponde al backend inicial y debe adaptarse en S02/S03.**
 
 **Prerrequisito:** completar la [guía 06](docs/06-repositorio-y-pipeline.md) y las correcciones de integración del [10](docs/10-auditoria-del-repositorio.md). Los comandos siguientes describen el entorno objetivo; no funcionan todavía con esta copia sin los esqueletos, dependencias y archivos de entorno de ejemplo que faltan.
 
@@ -38,7 +43,7 @@ make migrate   # migraciones + seeders
 ```
 Tienda http://localhost:4200 · Panel http://localhost:4201 · Motorizado http://localhost:4202 · API http://localhost:8080/api/v1 · Correos de prueba http://localhost:8025
 
-## Estructura
+## Estructura de referencia anterior (parcialmente presente)
 ```
 docs/       documentación (docs as code)
 contracts/  openapi.yaml y esquemas de eventos — fuente de verdad de la API
@@ -51,5 +56,5 @@ infra/      docker-compose, Dockerfiles
 ## Reglas del repositorio
 - ADR-004 establece `main` protegida y PR con revisión cruzada. El equipo unipersonal confirmado requiere un nuevo ADR para adaptar esa aprobación; ver 08 §5. Las protecciones remotas no se han verificado ni cambiado.
 - Conventional Commits. CI verde obligatorio.
-- Cambios de API empiezan en `contracts/openapi.yaml`.
-- Ningún módulo importa de otro fuera de `Contracts/` y `Events/` (deptrac lo verifica).
+- Cambios de API empiezan por contratos versionados por servicio; `contracts/openapi.yaml` conserva la línea base anterior.
+- Ningún servicio accede a tablas/modelos de otro: comunicación por API/eventos y pruebas de contratos/aislamiento. CI aún debe implementarse; la estructura objetivo figura en el documento 03.

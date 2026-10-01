@@ -1,5 +1,7 @@
 # 04 · Modelo de datos (MySQL 8)
 
+> **Actualización arquitectónica 30/09/2026:** [ADR-013](adr/ADR-013-servicios-independientes.md) establece servicios independientes. Este documento conserva material de la línea base; sus partes sobre backend único, tablas/transacciones compartidas, checkout inmediato e integración deben adaptarse por incremento. Prevalecen [03](03-arquitectura.md) y el [roadmap vigente](08-roadmap-y-plan-scrum.md). No se considera todo el documento revalidado por este aviso.
+
 | Campo | Valor |
 |---|---|
 | Proyecto | D'Too Limpieza |

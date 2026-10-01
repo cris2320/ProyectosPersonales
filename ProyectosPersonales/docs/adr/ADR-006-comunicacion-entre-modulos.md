@@ -1,8 +1,10 @@
 # ADR-006 · Comunicación entre módulos: contratos síncronos y eventos vía outbox
 
+> Registro histórico. Ver [ADR-013](ADR-013-servicios-independientes.md): servicios independientes, datos propios y consistencia distribuida. Las promesas anteriores de extracción sin rediseño o transacción compartida entre servicios no son vigentes.
+
 | Campo | Valor |
 |---|---|
-| Estado | Aceptado |
+| Estado | Reemplazado parcialmente por ADR-013 el 30/09/2026; conserva contratos e idempotencia/outbox |
 | Fecha | 2026-09-14 |
 | Decisores | Equipo de desarrollo |
 | Relacionado con | 02 §3.3, §6 (catálogo de eventos) · ADR-005 · ADR-003 |

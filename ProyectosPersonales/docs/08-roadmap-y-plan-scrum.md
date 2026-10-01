@@ -1,157 +1,103 @@
-# 08 · Roadmap de tres meses y plan de trabajo individual
+# 08 · Roadmap de tres meses: primera base de servicios independientes
 
 | Campo | Valor |
 |---|---|
-| Proyecto | D'Too Limpieza |
-| Versión | Borrador v0.3 · actualizado el 26/09/2026 |
-| Inicio confirmado | **26/09/2026** |
-| Horizonte de tres meses | **26/09/2026–26/12/2026** |
-| Desarrollo, pruebas y decisiones | **Cristhian Rodriguez Ruiz, una persona** |
-| Dedicación confirmada | **20 horas semanales, incluyendo desarrollo, pruebas y documentación** |
-| Estado del alcance | Propuesta de primer incremento; pendiente de decisión final de Cristhian |
-| Evidencia de partida | [10 · Auditoría](10-auditoria-del-repositorio.md) |
-| Decisiones abiertas | [11 · Registro de decisiones](11-decisiones-pendientes.md) |
-| Tareas con fechas y horas | [cronograma-3-meses.csv](cronograma-3-meses.csv) |
-| Alcance completo replanificado | [backlog-replanificado.csv](backlog-replanificado.csv) |
-| Línea base anterior | [backlog.csv](backlog.csv) y [roadmap v0.2 histórico](historico/08-roadmap-v0.2.md) |
+| Actualización | 30/09/2026 · v0.5, ejecución iniciada |
+| Inicio formal / horizonte | **26/09/2026–26/12/2026** |
+| Responsable único | **Cristhian Rodriguez Ruiz: desarrollo, pruebas y decisiones** |
+| Dedicación confirmada | **20 h/semana en total** |
+| Dirección confirmada | Servicios con despliegue, escalado y trazabilidad independientes; [ADR-013](adr/ADR-013-servicios-independientes.md) |
+| Alcance y estimaciones | Incremento autorizado para ejecución por Cristhian el 30/09; estimaciones revisables, cierres sujetos a evidencia |
+| Tareas vigentes | [cronograma-3-meses.csv](cronograma-3-meses.csv) |
+| Plan anterior | [Roadmap previo](historico/08-roadmap-y-plan-scrum-antes-servicios-2026-09-30.md) y [CSV previo](historico/cronograma-3-meses-antes-servicios-2026-09-30.csv), sustituidos |
 
-**Inicio autorizado:** Cristhian solicita comenzar por los prerrequisitos de instalación. Ver [12](12-prerrequisitos-windows.md). Su aprobación global está condicionada a que no falte nada; como persisten decisiones y evidencias pendientes, el [11](11-decisiones-pendientes.md) mantiene el alcance concreto de esa autorización y los cierres por verificar.
+## 1. Resultado del trimestre
 
-## 1. Resultado que se propone para el trimestre
+Dos servicios ejecutables e independientes: **Identidad y Catálogo mínimo**, un panel Angular mínimo, contratos, entrada HTTP, bases con permisos separados, publicación de eventos a un consumidor técnico, trazas distribuidas y evidencia de carga/aislamiento/despliegue. El usuario autorizó continuar con este plan el 30/09/2026. Sus horas son estimaciones que se recalibran con ejecución real; esa autorización no acepta tareas todavía sin comprobar.
 
-**Entregar una base ejecutable, probada y preparada para desarrollar el negocio por módulos:** entorno local reproducible, CI, Laravel modular, workspace Angular de tres apps, contrato/cliente, Shared corregido, Identidad con MFA, componentes visuales base y login funcional del panel y motorizado.
+Catálogo solo incluye una operación protegida para crear producto sintético y su consulta pública. No incluye el catálogo comercial completo, precios históricos, gestión de imágenes ni disponibilidad real. El consumidor técnico prueba outbox/inbox y recuperación; no es Notificaciones terminado. El primer login debe incluir MFA del administrador y pruebas de revocación/permisos.
 
-El alcance corresponde a **E0-01–E0-10: 35 puntos históricos**, más trabajo de corrección detectado en la auditoría. No se consideran completados esos puntos por el código inicial existente: primero deben pasar las pruebas y los criterios de aceptación.
+Este incremento **no habilita ventas** ni completa E0-01–E0-10. Se aplazan la construcción completa de tres apps, el design system amplio y los recorridos operativos del plan anterior. Inventario, Pedidos, Fulfillment, Cobranza y Notificaciones comercial permanecen en el backlog; no se promete siete servicios funcionales para diciembre.
 
-Este resultado **no habilita todavía ventas reales**. Catálogo, Inventario transaccional, checkout, rutas, entregas offline y caja siguen en el backlog. Si el resultado obligatorio de diciembre es vender, se debe aprobar y volver a estimar un MVP que complete un recorrido de negocio coherente. No basta trasladar etiquetas Must a otro sprint ni eliminar pruebas para forzar una fecha.
+## 2. Capacidad y fechas reales
 
-No se ha aprobado ningún recorte definitivo del producto. Se conserva todo el alcance original y se propone qué financiar con las horas disponibles de este trimestre.
+Se conserva el inicio formal del 26/09. Hoy es 30/09: no existe evidencia de ejecución que permita marcar como terminadas las tareas previstas para 28–29/09. La nueva asignación comienza el **30/09/2026**, sin contabilizar retroactivamente esas horas como realizadas.
 
-## 2. Capacidad: cálculo y límites
+| Concepto | Horas |
+|---|---:|
+| 59 días disponibles del 30/09 al 24/12, a 4 h/día | 236 brutas |
+| Trabajo enfocado, incluidas pruebas por tarea: 59 × 3 | 177 |
+| Gestión, revisión, documentación transversal e imprevistos: 59 × 1 | 59 |
+| Diez tareas propuestas S01–S10 | **168** |
+| Reserva enfocada sin nuevas funciones | **9** |
 
-El backlog contiene **88 historias y 440 puntos**: 87 historias/432 puntos en fase 1, de los cuales 415 Must y 17 Should; ocho puntos adicionales de reseñas en fase 1.1. La conversión anterior era `1 punto ≈ medio día enfocado`. Para poder contrastar números se interpreta ese medio día como cuatro horas; **es una hipótesis heredada que debe calibrarse**, no velocidad observada ni una equivalencia universal de Scrum.
+Supuesto de lunes a viernes; se excluyen 08/10, 08/12 y 09/12. El 25/12 queda fuera del trabajo y el 26/12 es corte administrativo. Se mantiene el calendario de feriados de la línea base. Ninguna semana supera 20 h ni se suman las horas de gestión por fuera de esa capacidad.
 
-| Concepto | Cálculo | Horas |
-|---|---|---:|
-| Referencia de 12 semanas | 12 × 20 h | 240 brutas |
-| Calendario real propuesto del 28/09 al 24/12 | 61 días disponibles × 4 h | 244 brutas |
-| Trabajo enfocado, incluidas pruebas de cada tarea | 61 × 3 h | 183 |
-| Revisión de avances, documentación transversal, decisiones e imprevistos | 61 × 1 h | 61 |
-| E0: diez historias originales | 35 puntos × 4 h | 140 |
-| Revisión/correcciones de auditoría adicionales | T01 + T09 + T10 + T11 + T13 | 32 |
-| Validación final y regresiones | T16 | 8 |
-| **Total de tareas calendarizadas** | **140 + 32 + 8** | **180** |
-| Reserva enfocada sin asignar | 183 − 180 | 3 |
+Las 168 h son una estimación inicial por tareas, no una conversión de los 440 puntos históricos ni una garantía de entrega. Instrumentación, integración de librerías o instalación pueden requerir más; si ocurre, se reduce el incremento o se amplía fecha explícitamente. No se recortan las pruebas de seguridad para mantener una fecha.
 
-Se supone distribución de **4 h de lunes a viernes**, sin fines de semana, y se excluyen 08/10, 08/12, 09/12 y 25/12. El 01/11 cae domingo y no reduce los días previstos. [Calendario oficial de feriados del Perú](https://www.gob.pe/feriados). Si prefieres trabajar otros días, se redistribuyen las mismas 20 h, sin sumarlas como capacidad adicional.
+## 3. Plan por partes
 
-**Doce semanas no equivalen a tres meses calendario:** desde el 26/09, las primeras doce semanas terminan el 18/12 inclusive; el horizonte solicitado termina el 26/12. La última semana se usa para terminar login, aceptar el incremento y absorber ajustes. No es una semana de lanzamiento comercial. El sábado 26/09 queda como inicio y decisiones iniciales; el primer bloque de trabajo calendarizado comienza el lunes 28/09.
+| Parte | Trabajo | Puerta de salida |
+|---|---|---|
+| 1 · Primera etapa, octubre | S01–S03 y comienzo de S04: límites, entorno y proyectos separados | Imágenes/CI independientes, bases separadas y contratos de identidad/eventos definidos |
+| 2 · Noviembre | Finalizar S04; S05–S07: identidad, catálogo mínimo, panel y eventos | Recorrido mínimo y reentrega sin duplicación de efectos locales |
+| 3 · Diciembre | S08–S10: trazas, métricas, carga/aislamiento, rollback y aceptación | Evidencias de independencia, recuperación y trazabilidad; siguiente incremento reestimado |
 
-A la hipótesis de cuatro horas por punto, los **415 Must equivalen a 1 660 horas enfocadas**. A 15 h enfocadas por semana serían unas **111 semanas**, antes de feriados, aprendizaje y nuevo trabajo. Es una extrapolación de estimaciones sin calibrar, **no una fecha de entrega del producto**. Sí demuestra que el compromiso anterior de todo el producto en tres meses no tiene sustento para una persona a 20 h.
-
-El margen es reducido. Si las correcciones exceden sus 32 h o la instalación requiere aprendizaje adicional, se reduce el alcance del trimestre o se cambia la fecha; no se consumen silenciosamente horas personales extra ni se rebajan garantías.
-
-## 3. Plan por partes y meses
-
-| Parte | Periodo | Trabajo | Entregable y puerta de salida |
-|---|---|---|---|
-| **1 · Decisiones y entorno** | 26/09–28/10 | T01–T06: alcance, flujo individual, ADRs de servicios, herramientas, Laravel, Angular, Docker y CI | Clon limpio reproducible; apps compilan; API de salud; primer PR con checks verdes. El 06 sigue abierto si falta alguna evidencia |
-| **2 · Contrato y backend base** | 29/10–27/11 | T07–T13: contrato/cliente, Shared, concurrencia de idempotencia, outbox, auditoría, errores, Identidad/MFA | Pruebas de integración MySQL y regresiones de seguridad; backend base validado; no declarar el 07 cerrado con pruebas solo secuenciales |
-| **3 · Interfaces de acceso y aceptación** | 30/11–26/12 | T14–T16: design system, login panel/motorizado, aceptación y siguiente etapa | Login real con MFA, componentes probados, clon limpio/CI y evidencias; decisión del alcance siguiente |
-
-Las tres apps de T04 son esqueletos: SSR/PWA configurados no equivalen a tienda implementada ni sincronización offline operativa. Las pantallas comerciales se desarrollarán en incrementos posteriores.
+Las fechas exactas siguientes gobiernan la asignación; las partes mensuales no agregan trabajo paralelo. OpenTelemetry y contexto se diseñan desde S01 y se incorporan en cada servicio; S08 integra el visor, métricas y validación completa.
 
 ## 4. Tareas y tiempos
 
-Las fechas son una propuesta calculada secuencialmente a **máximo tres horas enfocadas por día disponible**. Dos tareas pueden compartir una fecha porque se divide el bloque de ese día; no se planifican dos desarrolladores ni ejecución simultánea. La suma diaria se mantiene dentro del límite.
-
-| ID | Fechas de 2026 | Horas | Tarea / trazabilidad |
+| ID | Fechas de 2026 | Horas | Trabajo |
 |---|---|---:|---|
-| T01 | 28/09–29/09 | 6 | Alcance del trimestre, flujo individual y raíz Git; DEC-04/05/06 |
-| T02 | 30/09–02/10 | 8 | ADR-009/010/011 y decisiones de infraestructura; E0-09 |
-| T03 | 02/10–09/10 | 12 | Herramientas, Laravel modular y configuración de calidad; E0-03 |
-| T04 | 09/10–20/10 | 20 | Workspace Angular: tres apps, cinco libs, SSR/PWA, strict y builds; E0-04 |
-| T05 | 20/10–26/10 | 12 | Variables de ejemplo, Docker y arranque limpio integrado; E0-02 |
-| T06 | 26/10–28/10 | 8 | Workflows, reglas GitHub y CI; E0-01 |
-| T07 | 29/10–02/11 | 8 | Contrato, patrones MFA, cliente generado y verificación; E0-05/A09 |
-| T08 | 02/11–11/11 | 20 | Integración Shared, migraciones y pruebas; E0-06 |
-| T09 | 11/11–16/11 | 10 | Idempotencia concurrente, recuperación y replay; A03 |
-| T10 | 16/11–18/11 | 6 | Outbox, fallos de consumidores y pruebas; A05/A06 |
-| T11 | 18/11–19/11 | 4 | Errores, trace ID, configuración y auditoría; A08/A10 |
-| T12 | 20/11–25/11 | 12 | Integración Identidad y MFA; E0-07 |
-| T13 | 26/11–27/11 | 6 | Guards, autorización, revocación y cambio MFA; A04/A07 |
-| T14 | 30/11–10/12 | 20 | Componentes base, contraste, teclado y accesibilidad; E0-10/A11 |
-| T15 | 10/12–21/12 | 20 | Login panel/motorizado, QR, interceptores y pruebas; E0-08 |
-| T16 | 21/12–23/12 | 8 | Aceptación, regresiones y planificación posterior |
-| Reserva | 24/12 | 3 disponibles | No se asignan nuevas funciones; 25/12 sin trabajo; corte administrativo 26/12 |
-| **Total tareas** | | **180** | **172 h de construcción/correcciones + 8 h de validación final** |
+| S01 | 30/09–05/10 | 12 | Definir límites, contratos iniciales, identidad, broker y perfil de aceptación |
+| S02 | 06/10–12/10 | 12 | Validar Windows/WSL/Docker y preparar infraestructura local por perfiles |
+| S03 | 13/10–20/10 | 16 | Crear dos proyectos Laravel con imágenes y CI independientes |
+| S04 | 20/10–02/11 | 28 | Integrar Identidad mínimo, MFA y autenticación entre servicios |
+| S05 | 02/11–11/11 | 20 | Implementar catálogo mínimo con escritura protegida y lectura pública |
+| S06 | 11/11–18/11 | 16 | Integrar entrada HTTP y panel Angular mínimo con clientes de contrato |
+| S07 | 18/11–27/11 | 20 | Implementar outbox y consumidor técnico con inbox e idempotencia |
+| S08 | 27/11–04/12 | 16 | Instrumentar trazas, logs, métricas y alertas mínimas por servicio |
+| S09 | 04/12–15/12 | 16 | Probar carga, límites, aislamiento, dos réplicas y rollback independiente |
+| S10 | 16/12–21/12 | 12 | Demostrar incremento, conciliar documentación y reestimar negocio |
+| Reserva | 22/12–24/12 | 9 | Incidencias y ajustes; sin nuevas funciones |
+| **Total tareas** | | **168** | Incluye pruebas por tarea y aceptación final |
 
-El [CSV de tareas](cronograma-3-meses.csv) contiene dependencias, responsable, tipo de trabajo y criterio de salida de cada fila. Todas figuran como **Propuesto**, no como ejecutadas o aceptadas.
+Cada día dispone de 3 h enfocadas. Si dos tareas comparten fecha, se dividen ese bloque; no se ejecutan como si hubiera dos personas. El [CSV vigente](cronograma-3-meses.csv) registra dependencias secuenciales y criterios de salida. Las tareas T01–T16 del plan anterior quedan históricas, no completadas ni sumadas a S01–S10.
 
-La planificación resuelve una dependencia práctica del backlog antiguo: el «entorno completo» necesita los esqueletos Laravel/Angular que allí se programaban después. Ahora primero se preparan las herramientas/esqueletos, luego se demuestra el arranque conjunto y se cierra CI. El repositorio local ya existe; no se repite su creación como si partiera de cero.
+### Estado de ejecución al 30/09/2026
 
-E0-06 solo puede aceptarse tras T11 y E0-07 tras T13. T07 verifica las operaciones ya implementadas e identifica contratos futuros; no debe declarar implementadas categorías/pedidos por figurar en OpenAPI. Los contratos futuros se añaden a la prueba de conformidad cuando se implementan.
+**S01 en curso**, inicio real 30/09; **0/10 tareas principales completadas**. Mapa de datos, borrador de contratos y perfil de aceptación elaborados; faltan compatibilidad conjunta y formalización/validación de contratos. Evidencia en [expediente S01](seguimiento/S01-fundaciones-servicios.md). S02–S10 permanecen pendientes, sin inicio/cierre real.
 
-## 5. Cadencia individual y revisiones
+El [tablero del calendario](13-seguimiento-scrum.md) y el CSV registran estados, fechas reales, evidencia y pendientes. Las fechas de §4 son la línea base; nunca se usan como fecha real de cierre sin ejecución. Los avances documentales parciales se marcan dentro del expediente, sin cerrar la tarea principal.
 
-Se propone un flujo individual con entregas quincenales, límite de **una tarea de implementación en curso** y revisión semanal. No se simulan roles independientes ni revisión cruzada entre personas que no existen.
+## 5. Cadencia y reglas de trabajo
 
-| Momento | Tiempo de gestión | Resultado |
-|---|---:|---|
-| Inicio de semana | 20 min | Elegir tareas según horas y dependencias reales |
-| Cierre de cada bloque diario | 5 min | Horas, evidencia, impedimentos y siguiente paso |
-| Revisión de cada viernes disponible | 30 min | Demo o evidencia, desviación de horas y ajuste |
-| Revisión quincenal | 45 min dentro de la bolsa de gestión | Aceptar entregables y recalibrar estimaciones |
-| Cierre del trimestre | Incluido en T16 | Informe de resultado real, pendientes y siguiente incremento |
+Una tarea de implementación en curso; registrar horas y evidencia al terminar cada bloque. Revisar alcance/capacidad semanalmente y demostrar avances quincenalmente, usando la bolsa de gestión. Al terminar S02 se recalibra el resto con tiempo real de instalación e integración. Si esa revisión ocurre después de la fecha prevista, se recalculan las tareas siguientes; no se mantienen fechas retrospectivas como promesas.
 
-Revisiones quincenales propuestas: **09/10, 23/10, 06/11, 20/11, 04/12 y 18/12**; aceptación final objetivo **23/12**. Se reserva el 24/12 para incidencias. Las ceremonias/documentación transversal usan la bolsa de 61 h; no se suman por encima de las 20 h semanales.
-
-ADR-004 exige una segunda persona que apruebe PRs. Adaptarlo requiere un **nuevo ADR propuesto y decisión de Cristhian**, conservando el histórico. Propuesta: PR, auto-revisión identificada como tal, checks obligatorios y evidencias; revisión externa puntual cuando esté disponible. No se han cambiado protecciones remotas ni se ha dado por aprobado ese flujo.
+ADR-004 aún requiere adaptar la revisión al equipo individual mediante un nuevo ADR: propuesta de PR, auto-revisión explícita y checks obligatorios, con revisión externa cuando esté disponible. No se han modificado protecciones remotas ni se simula aprobación de una segunda persona. Las decisiones de proveedores y costos se documentan antes de conectar o contratar servicios.
 
 ## 6. Definition of Ready y Done
 
-Una tarea entra en ejecución con criterio de salida, dependencias resueltas, decisión necesaria registrada y estimación revisada. Las compras/credenciales necesarias no se dan por existentes; si bloquean una integración, se adelanta otra tarea independiente y se registra el bloqueo.
+Cada tarea inicia con contrato/criterio de salida, dependencias y estimación revisados. Se acepta con pruebas relevantes y evidencia, no al llegar su fecha. Checks de contrato/build/calidad por servicio; MySQL real para persistencia, permisos y concurrencia; fallos/reintentos en broker real para eventos.
 
-Para aceptar una tarea:
+La aceptación final exige los criterios del ADR-013: despliegue independiente, dos réplicas, aislamiento SQL, traza HTTP/asíncrona, recuperación sin duplicar efectos, aislamiento medido bajo carga y CI. El perfil de carga define hardware, datos, duración, solicitudes por segundo, concurrencia y umbrales antes del ensayo. No se extrapola capacidad comercial de una prueba sintética mínima.
 
-- Código integrado mediante el flujo aprobado, con auto-revisión o revisión real documentada, sin describir una como la otra.
-- Checks relevantes verdes: formato, tipos, fronteras, contrato y build; pruebas MySQL cuando afecta persistencia/concurrencia.
-- Casos de error, reintento y autorización comprobados según el cambio. Un mock no sustituye la integración real.
-- Cambios en docs y contratos trazables; horas reales y evidencia enlazadas al ID de la tarea.
-- Secretos fuera del repositorio; datos sintéticos en pruebas y entornos de validación.
-- Cristhian acepta el criterio de salida. Una tarea que falla queda pendiente; no se considera terminada al llegar su fecha.
+En S10 se actualizan las partes afectadas de 02/04/05/06/07 y se registran asuntos todavía abiertos. Ningún resultado de fundaciones constituye certificación completa de seguridad, accesibilidad, cumplimiento o alta disponibilidad productiva.
 
-Seguridad, accesibilidad y pruebas se aplican a cada incremento; no se reservan todas para el final. La aceptación de fundaciones tampoco constituye una certificación global ASVS/WCAG o legal del futuro producto.
+## 7. Trazabilidad del backlog
 
-## 7. Trazabilidad del alcance completo
+Se conservan **88 historias y 440 puntos históricos** (432 fase 1 + 8 fase 1.1) en [backlog.csv](backlog.csv) y [backlog-replanificado.csv](backlog-replanificado.csv). Sus criterios originales no se reescriben para fingir cumplimiento. La asignación anterior de E0 al trimestre se retira; las fechas por historia quedan vacías hasta dividir y reestimar los criterios para servicios.
 
-El [backlog original](backlog.csv) se conserva como línea base histórica: responsables BE/FE y sprints S0–S6 **no son asignaciones actuales**. [backlog-replanificado.csv](backlog-replanificado.csv) conserva las 88 historias, prioridades, puntos, dependencias y criterios originales; añade el responsable actual, fechas propuestas solo para E0 y evidencia pendiente. Las referencias antiguas a «ambos», aprobación independiente y cuentas contratadas requieren adaptar sus criterios al tomar las decisiones del 11.
+S01–S10 son nuevas tareas de fundaciones distribuidas. Sus referencias a E0/E1 son parciales, no horas adicionales ni aceptación de esas historias completas. Ejemplo: S05 permite crear/consultar un producto para demostrar aislamiento, pero no entrega todo E1-02. Los hallazgos A03–A10 de la auditoría se comprueban al reutilizar cada pieza; los no cubiertos permanecen abiertos.
 
-| Etapa propuesta | Historias/puntos de referencia | Programación actual |
-|---|---|---|
-| Fundaciones E0 | 10 / 35 | Primer trimestre; T01–T16 incluyen correcciones adicionales |
-| Catálogo/Inventario E1 | 11 / 62 | Posterior, sin fecha comprometida |
-| Pedidos/Zonas/Clientes E2 | 11 / 61 | Posterior, depende de Catálogo/Inventario |
-| Riesgo/Fulfillment/Notificaciones E3 | 11 / 75 | Posterior, depende del flujo de pedidos |
-| Motorizado/Cobranza E4 | 10 / 65 | Posterior, requiere idempotencia, rutas y caja |
-| Tiempo real/calidad/operación E5 | 12 / 67 | Posterior; sus controles aplicables se incorporan antes a cada incremento |
-| Lanzamiento E6 | 6 / 21 | Sin fecha; requiere flujo completo aceptado |
-| Cumplimiento E7 fase 1 | 16 / 46 | Transversal; antes de cada funcionalidad afectada y de cualquier lanzamiento |
-| Reseñas E7-07 fase 1.1 | 1 / 8 | Sin compromiso; «fase 1.1» no significa automáticamente mes 4 |
-| **Total** | **88 / 440** | **432 de fase 1 + 8 de fase 1.1** |
+La lista completa de historias continúa siendo el alcance de referencia, sin fecha comercial. No se conserva el compromiso anterior de 35 puntos E0 en el trimestre porque su alcance y arquitectura han cambiado.
 
-Los puntos de E7 se contabilizan aparte de E0; redactar ADRs no equivale a implementar Sentry/Linear/alertas ni se marcan esas historias como completadas en el trimestre. E7-11/16 definen controles transversales: las pruebas del bloque inicial no cierran todos sus criterios de producto.
+## 8. Incrementos posteriores y lanzamiento
 
-## 8. Condiciones para un MVP de ventas y para lanzamiento
+Después de aceptar la base: ampliar Catálogo y construir Inventario; acordar estados/temporizadores y saga de Pedidos; después operación logística, cobranza, notificaciones y offline. Esa secuencia no fija meses: depende de nuevas estimaciones y de las decisiones de negocio del 11.
 
-Si Cristhian decide que diciembre debe incluir ventas, el próximo ejercicio debe separar historias y estimar un recorrido mínimo: catálogo → stock/cupo atómico → pedido → confirmación → preparación → entrega/cobro → conciliación → devoluciones/reclamaciones. Deben incluirse autenticación, auditoría, datos personales, respaldo y operación manual de contingencia. Cualquier simplificación de offline/tiempo real requiere revisar ADR-007/008 y aceptación de su impacto.
+Antes de checkout deben reconciliarse 02/04/05, OpenAPI y eventos: intento pendiente, reserva/confirmación/vencimiento, compensación y recuperación manual. Antes de producción se prueban respaldo/restauración, despliegue, control de accesos y operación real; se cierran los requisitos aplicables del 09. No hay MVP de ventas aprobado en 168 h.
 
-**No hay un MVP transaccional estimado y aprobado en 180 h.** Este documento no promete uno. Para conservar el alcance completo hay que ampliar plazo/capacidad; para conservar los tres meses hay que aceptar el incremento propuesto o aprobar otro alcance reestimado.
+## 9. Decisiones vigentes
 
-El lanzamiento comercial requiere evidencias de stock/cupo sin duplicados, cobros y caja íntegros, permisos por objeto, recuperación/rollback ensayados, funcionamiento de operación sin conexión según el alcance aprobado, datos/textos definitivos, atención de reclamos y aceptación de usuarios. Llegar al 26/12 no sustituye esos criterios.
-
-## 9. Qué se decide primero
-
-Ya están confirmados **fecha de inicio, responsable único y dedicación de 20 h/semana**. Queda decidir **si se acepta fundaciones como resultado del trimestre o si se necesita redefinir un MVP de ventas**, y después el flujo de revisión individual. El detalle y las demás decisiones están en el [11](11-decisiones-pendientes.md).
-
-El plan se recalcula después de las dos primeras semanas usando horas reales y al final de cada quincena. Los documentos 06/07 solo se cierran con evidencia; el 09 sigue pendiente de aprobación. No se da por aprobado un documento por actualizar sus fechas.
+Confirmados: fecha inicial, responsable, 20 h/semana, servicios independientes y autorización para ejecutar el incremento de dos servicios del calendario. El mapa completo de siete servicios y las herramientas pendientes de validar siguen como diseño técnico propuesto. Pendientes: contrato final de identidad, broker/paquetes compatibles, proveedores/costos y validaciones de negocio. Ver [11](11-decisiones-pendientes.md). La instalación comienza con [12](12-prerrequisitos-windows.md); esta replanificación no instala programas ni crea servicios ejecutables.

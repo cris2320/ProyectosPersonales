@@ -1,5 +1,7 @@
 # 01 · Visión del producto y requisitos de calidad
 
+> **Actualización arquitectónica 30/09/2026:** [ADR-013](adr/ADR-013-servicios-independientes.md) establece servicios independientes. Este documento conserva material de la línea base; sus partes sobre backend único, tablas/transacciones compartidas, checkout inmediato e integración deben adaptarse por incremento. Prevalecen [03](03-arquitectura.md) y el [roadmap vigente](08-roadmap-y-plan-scrum.md). No se considera todo el documento revalidado por este aviso.
+
 | Campo | Valor |
 |---|---|
 | Proyecto | **D'Too Limpieza** — e-commerce de productos de limpieza, aseo y desinfección |
@@ -119,7 +121,7 @@ Escenarios medibles. Gobiernan las decisiones de arquitectura y se verifican con
 ### 6.2 Rendimiento y capacidad
 - Página de producto y categoría: LCP ≤ 2,5 s, INP ≤ 200 ms, CLS ≤ 0,1 en móvil 4G (percentil 75).
 - Checkout: cada paso responde en ≤ 500 ms (p95) del lado servidor.
-- Capacidad operativa fase 1: **~60 pedidos/día** (§3.1). Capacidad técnica de diseño: **300 pedidos/día** con picos de **60 pedidos/hora**, para que el sistema no sea el límite al sumar motorizados. La arquitectura debe soportar **10× (3 000 pedidos/día)** solo añadiendo recursos, sin cambio estructural, y la aspiración de 20 000/mes sin rediseño.
+- Capacidad operativa fase 1: **~60 pedidos/día** (§3.1). Capacidad técnica de diseño: **300 pedidos/día** con picos de **60 pedidos/hora**, para que el sistema no sea el límite al sumar motorizados. El objetivo de crecimiento es **10× (3 000 pedidos/día)** y la aspiración de 20 000/mes. Son objetivos por validar con perfiles de tráfico y pruebas de carga; no capacidad demostrada ni garantía de crecer sin adaptar código o infraestructura. ADR-013 exige escalado independiente por servicio.
 - Panel de operación y app del motorizado: cada acción (asignar, marcar entregado, registrar cobro) responde en ≤ 300 ms (p95); 10 operadores concurrentes en fase 1, diseñado para 50.
 - Cupo de entregas por día y zona configurable; el checkout consulta el cupo disponible antes de ofrecer una ventana de entrega.
 - Cambios de disponibilidad de stock visibles en la tienda en ≤ 2 s desde que ocurren en almacén o por otra venta (conexión en tiempo real servidor → navegador; herramienta a decidir en el paso 3).
@@ -148,7 +150,7 @@ Escenarios medibles. Gobiernan las decisiones de arquitectura y se verifican con
 - La app del motorizado se opera con una mano, en exterior y con conexión intermitente.
 
 ### 6.7 Escalabilidad y evolución
-- Arquitectura de monolito modular en Laravel: módulos con fronteras explícitas (Catálogo, Pedidos, Fulfillment, Cobranza, Clientes, Zonas). Un módulo no accede a las tablas de otro.
+- Arquitectura de servicios independientes en Laravel, según ADR-013: despliegue y escalado por servicio, contratos versionados y propiedad exclusiva de datos. No hay acceso directo a tablas de otro servicio.
 - Zonas de cobertura, tarifas de envío, listas de precios y métodos de cobro son datos configurables, no código.
 - Cualquier módulo puede extraerse a un servicio independiente sin cambiar el contrato que expone a los demás.
 

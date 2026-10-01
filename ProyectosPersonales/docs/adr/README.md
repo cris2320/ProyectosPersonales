@@ -11,10 +11,13 @@ Cada decisión técnica relevante queda registrada en un archivo corto e inmutab
 | [ADR-002](ADR-002-laravel-backend.md) | Laravel como backend, exclusivamente API | Aceptado | 2026-09-14 |
 | [ADR-003](ADR-003-mysql.md) | MySQL como base de datos transaccional | Aceptado | 2026-09-14 |
 | [ADR-004](ADR-004-github-monorepo-flujo.md) | GitHub, monorepo y flujo de trabajo trunk-based | Aceptado | 2026-09-14 |
-| [ADR-005](ADR-005-monolito-modular.md) | Monolito modular en Laravel con fronteras verificadas | Aceptado | 2026-09-14 |
-| [ADR-006](ADR-006-comunicacion-entre-modulos.md) | Comunicación entre módulos: contratos síncronos y eventos vía outbox | Aceptado | 2026-09-14 |
+| [ADR-005](ADR-005-monolito-modular.md) | Monolito modular en Laravel con fronteras verificadas | Reemplazado por ADR-013 | 2026-09-14 |
+| [ADR-006](ADR-006-comunicacion-entre-modulos.md) | Comunicación entre módulos: contratos síncronos y eventos vía outbox | Reemplazado parcialmente por ADR-013 | 2026-09-14 |
 | [ADR-007](ADR-007-tiempo-real.md) | Tiempo real con Laravel Reverb (WebSockets) | Aceptado | 2026-09-14 |
 | [ADR-008](ADR-008-pwa-offline-motorizado.md) | PWA con operación fuera de línea para el motorizado | Aceptado | 2026-09-14 |
+| [ADR-013](ADR-013-servicios-independientes.md) | Servicios con despliegue, escalado y trazabilidad independientes | Dirección aceptada; detalle propuesto | 2026-09-30 |
+
+ADR-009/010/011/012 siguen pendientes; ADR-012 está reservado para analítica. Aceptación arquitectónica no significa implementación validada.
 
 ## Cómo crear un ADR
 

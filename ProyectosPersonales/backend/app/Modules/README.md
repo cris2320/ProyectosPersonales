@@ -1,5 +1,7 @@
 # Módulos (ADR-005)
 
+> 30/09/2026: esta estructura pertenece al backend inicial. La arquitectura objetivo es [ADR-013](../../../docs/adr/ADR-013-servicios-independientes.md); se reutiliza código solo después de adaptar datos, contratos y pruebas a cada servicio. No representa servicios independientes ya implementados.
+
 Cada carpeta es un bounded context del documento 02. Estructura obligatoria:
 
 ```
